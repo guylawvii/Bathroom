@@ -1,0 +1,269 @@
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 基础设置 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* body设置 */
+.page-container-table {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    min-height: 100vh;
+    background: white;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 项目标题 & Option标题在main.css */
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 基础设置 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 1. 主体部分（不含日期） ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 1.1 主体 */
+.body-container-table {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: var(--project-title-header-height);
+    margin-bottom: var(--date-height);
+    padding: 0 var(--export-LR-padding) !important;
+    width: 100%;
+    min-height: 0;
+    background: white;
+}
+/* Option标题容器 */
+.header-container-table {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    top: 0;
+    height: var(--option-header-height);
+    border-bottom: 1px solid transparent;
+    background: white;
+    z-index: 30;
+}
+
+/* 1.2 导出EXCEL按钮提示 */
+#export-excel-btn::after {
+    top: calc(var(--btn-height) / 2);
+    left: 0;
+    background: transparent;
+    transform: translateX(-100%) translateY(-50%);
+}
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 2. 表格部分 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 2. 表格主体 */
+.content-container-table {
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* 2.1 表头 & 表尾 */
+#chart thead,
+#chart tfoot {
+    position: sticky;
+    z-index: 20;
+    background-color: rgb(246, 246, 246);
+    height: 65px;
+    z-index: 50;
+}
+/* ↓↓↓↓↓ 2.2 表头 ↓↓↓↓↓ */
+#chart thead {
+    top: 0;
+    box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.1);
+}
+/* 表头字体 */
+#chart th {
+    font-weight: 400;
+    text-align: left;
+    white-space: nowrap;
+}
+/* 表头 - 可排序列鼠标手势 */
+#chart th[data-column] {
+    cursor: pointer;
+}
+/* 表头 - 可排序列悬停 */
+#chart th[data-column]:hover {
+    background-color: #f0f0f0;
+}
+/* 表头 - 当前排序列 */
+#chart th.sorting-active {
+    background-color: #eaeaea;
+}
+/* ↑↑↑↑↑ 2.2 表头 ↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓ 2.3 表尾 ↓↓↓↓↓ */
+#chart tfoot {
+    bottom: 0;
+    box-shadow: 0 -1px 8px 3px rgba(0, 0, 0, 0.1);
+}
+/* 2.3 字体 */
+#chart tfoot td {
+    font-size: 18px;
+    font-weight: 300;
+}
+tfoot tr td {
+    border-bottom: none !important;
+}
+/* ↑↑↑↑↑ 2.3 表尾 ↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓ 2.4 表身 ↓↓↓↓↓ */
+/* 整个表身 */
+#chart {
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* 表身 & 表尾单元格 */
+#chart td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    vertical-align: center;
+    word-wrap: break-word;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 所有单元格左右边距 & 字体大小 */
+#chart th,
+#chart td {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+    font-weight: 300;
+}
+/* 行悬停高亮 */
+#chart tr:hover td {
+    background-color: #f9f9f9;
+}
+/* ↑↑↑↑↑ 2.4 表身 ↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓ 2.5 列 ↓↓↓↓↓ */
+/* 列宽度 */
+#chart th:not(:last-child),
+#chart td:not(:last-child) {
+    max-width: 200px;
+}
+/* id列字体颜色 */
+#chart tbody td:first-child {
+    color: #999;
+}
+/* 超链接 */
+#chart a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 400;
+}
+#chart a:hover {
+    text-decoration: underline;
+}
+/* 图片 */
+.image-cell {
+    display: flex;
+    justify-content: center;
+}
+.furniture-img-table {
+    display: block;
+    max-width: 300px;
+    height: 130px;
+    object-fit: contain;
+}
+
+/* 洗手台 */
+.furniture-img-table[src*="vanity"] {
+  max-width: 400px !important;
+}
+/* 水龙头 */
+.furniture-img-table[src*="vanity__faucet"] {
+  max-width: 200px !important;
+}
+/* 卷纸架 */
+.furniture-img-table[src*="holder"] {
+  max-width: 180px !important;
+}
+
+
+/* ↑↑↑↑↑ 2.5 列 ↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓ 3. 滚动条 ↓↓↓↓↓ */
+/* 滚动条背景 */
+.content-container-table::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    background: var(--scrollbar-background-color);
+}
+/* 滚动条颜色 */
+.content-container-table::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: calc(var(--scrollbar-size) / 2);
+}
+/* 滚动条悬停颜色 */
+.content-container-table::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-hover-color);
+}
+/* ↑↑↑↑↑ 3. 滚动条 ↑↑↑↑↑ */
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 浏览器 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 打印页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+@media print {
+    /* 1.1 主体 */
+    /* 页边距 */
+
+    .header-container-table {
+        padding: 0 !important;
+    }
+    /* 表头 & 表尾 */
+
+    /* 取消表头&表尾阴影 */
+    #chart thead,
+    #chart tfoot {
+        box-shadow: none;
+        background-color: rgb(243, 243, 243);
+    }
+    #chart th,
+    #chart tfoot tr {
+        height: 35px;
+    }
+
+    /* 表身 */
+    #chart {
+        border-collapse: collapse;
+        page-break-inside: avoid;
+    }
+    #chart tr {
+        page-break-inside: avoid;
+    }
+    /* 取消行悬停高亮 */
+    #chart tr:hover td {
+        background-color: transparent;
+    }
+    /* 每行高度 */
+    #chart td {
+        padding: 5px 5px;
+    }
+    /* 图片 */
+    .furniture-img-table {
+        height: 50px;
+        max-width: 200px;
+    }
+    #export-excel-btn {
+        display: none;
+    }
+}

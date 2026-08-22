@@ -1,0 +1,1594 @@
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 基础设置 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 100vh;
+}
+img {
+  object-fit: contain;
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 基础设置 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 标题 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 项目标题 */
+.project-title-main,
+.project-title-table,
+.project-title-grid {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  top: 0;
+  left: 0;
+  padding: 0;
+  width: 100%;
+  height: var(--project-title-header-height);
+  background: white;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: var(--project-title-ft-size);
+  font-weight: 500;
+  text-align: center;
+  z-index: 100;
+}
+
+/* Option标题容器-main */
+.header-container-main {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  z-index: 1000;
+  background-color: transparent;
+
+  height: var(--project-title-header-height);
+  top: 0;
+  width: var(--split-container-width);
+  padding: 0;
+}
+
+/* Option标题 */
+.option-title-main,
+.option-title-table,
+.option-title-grid {
+  font-size: var(--option-name-ft-size);
+  font-weight: 300;
+}
+
+/* Option标题 - 总价 */
+.estimated-cost-header-main,
+.estimated-cost-header-grid {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: transparent;
+  color: black;
+  font-size: var(--option-name-ft-size);
+  font-weight: 300;
+}
+
+.option-title-main,
+.estimated-cost-header-main {
+  padding: 0;
+  font-size: calc(var(--option-name-ft-size) - 2px);
+}
+
+.estimated-cost-header-main {
+  position: relative;
+}
+
+/* 价格缺失警告 */
+.price-warning-absolute {
+  position: absolute;
+  height: var(--project-title-header-height);
+  align-self: center;
+  align-content: center;
+  white-space: nowrap;
+  left: 100%;
+  margin-left: 5px;
+  font-size: calc(var(--option-name-ft-size) - 4px);
+  color: var(--warning-text);
+}
+
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 标题 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* 左右布局容器 */
+.split-container {
+  position: fixed;
+  display: flex;
+  left: 50%;
+  top: var(--project-title-header-height);
+  width: var(--split-container-width);
+  transform: translateX(-50%);
+}
+
+/* 左边文字区域 */
+.left-panel-text {
+  overflow: auto;
+  /* padding: 20px; */
+  width: var(--left-panel-text-width);
+  background: #f0efee;
+}
+
+/* 右边：复用 element-container-main */
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 主体元素 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+.element-container-main {
+  position: relative !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: var(--background-width);
+  height: var(--background-height);
+}
+
+/* ↓↓↓ 背景+产品 ↓↓↓ */
+.furniture-wrapper {
+  position: static; /* 必须是static，否则dressing table打印时会错位 */
+  display: inline-block;
+  width: 100%;
+  height: 100vh;
+  transform-origin: center;
+}
+
+/* ↓↓↓ 1 索引图 ↓↓↓ */
+.plan_index_container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: var(--index-top);
+  right: var(--index-right);
+  width: var(--index-width);
+  transform: translateY(-100%);
+  z-index: 2;
+}
+#plan_index {
+  width: 100%;
+  opacity: 0.8;
+}
+/* ↑↑↑ 1 索引图 ↑↑↑ */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓ 2 背景墙地 ↓↓↓ */
+#background_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+.background-container {
+  position: absolute;
+  overflow: hidden;
+}
+
+.background-container:hover {
+  cursor: pointer;
+}
+.background-container .background-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 2.1 墙地材质素材贴图尺寸 */
+.background-container .background-placeholder img {
+  position: absolute;
+  /* top: var(--texture-offset-y, 0);
+  left: var(--texture-offset-x, 0); */
+  width: 1250px;
+  height: 1000px;
+  width: var(--background-width);
+  height: calc(var(--background-width) * 0.8);
+  object-fit: cover;
+}
+
+/* 2.1.1 材质切换旋转角度按钮 */
+.rotate-icon {
+  position: absolute;
+  left: 0;
+  top: calc(var(--category-name-ft-size) + var(--brandprice-ft-size) + 20px);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 25;
+  background: rgba(242, 242, 242, 0.8);
+  border-radius: 50%;
+  padding: 2px;
+  border: solid rgba(0, 0, 0, 1) 2px;
+  opacity: 0;
+  transition: opacity 0.15s ease-out;
+}
+.furniture-container:hover .rotate-icon,
+.background-container:hover .rotate-icon {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+/* 2.2.1 干区墙面 Dry Wall - bathroom_dry__wall */
+#dry__wall_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--dry-wall-width);
+  height: var(--dry-wall-height);
+  z-index: 1;
+}
+#dry__wall_container .background-placeholder img {
+  left: 0;
+  top: 0;
+}
+
+/* 2.2.2 干区墙面下部 Wainscoting - bathroom_dry__wall__lower */
+#dry__wall__lower_container {
+  position: absolute;
+  top: var(--dry-wall-lower-top);
+  left: 0;
+  width: var(--dry-wall-lower-width);
+  height: var(--dry-wall-lower-height);
+  z-index: 1;
+}
+#dry__wall__lower_container .background-placeholder img {
+  left: 0;
+  top: calc(-1 * var(--dry-wall-lower-top));
+}
+
+/* 2.2.3 湿区墙面 Shower Wall - bathroom_wet__wall */
+#wet__wall_container {
+  position: absolute;
+  top: 0;
+  left: calc(var(--background-width) - var(--wet-wall-width));
+  width: var(--wet-wall-width);
+  height: var(--wet-wall-height);
+  z-index: 2;
+}
+#wet__wall_container .background-placeholder img {
+  left: calc(var(--wet-wall-width) - var(--dry-wall-width));
+  top: 0;
+}
+
+/* 2.2.4 干区地面 Dry Floor - bathroom_dry__floor */
+#dry__floor_container {
+  position: absolute;
+  top: var(--dry-floor-top);
+  left: 0;
+  width: var(--dry-floor-width);
+  height: var(--dry-floor-height);
+  z-index: 0;
+}
+#dry__floor_container .background-placeholder img {
+  left: 0;
+  top: calc(-1 * var(--dry-floor-top, 0px));
+  /* filter:brightness(0.3); */
+}
+
+/* 2.2.5 湿区地面 Shower Floor - bathroom_wet__floor */
+#wet__floor_container {
+  position: absolute;
+  top: var(--wet-floor-top);
+  left: calc(var(--background-width) - var(--wet-wall-width));
+  width: var(--wet-floor-width);
+  height: var(--wet-floor-height);
+  z-index: 1;
+}
+#wet__floor_container .background-placeholder img {
+  left: calc(var(--wet-wall-width) - var(--dry-wall-width));
+  top: calc(-1 * var(--wet-floor-top, 0px));
+}
+
+/* 踢脚 */
+#base__trim_container {
+  position: absolute;
+  top: var(--base__trim-top);
+  left: 0;
+  width: var(--base__trim-width);
+  height: var(--base__trim-height);
+  z-index: 1 !important;
+  transform: translateY(calc(var(--base__trim-height) * (-1)));
+}
+
+#base__trim_container .background-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* 背景悬停闪一下效果 */
+@keyframes flash {
+  0% {
+    filter: brightness(1);
+  }
+  3% {
+    filter: brightness(1.05);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+.background-container:hover {
+  animation: flash 2s ease-in-out;
+}
+
+/* ↑↑↑ 2 背景墙地 ↑↑↑ */
+
+/* ↓↓↓ 3 产品 ↓↓↓ */
+#furniture_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* 3.1 每个产品容器 */
+.furniture-container {
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column-reverse;
+  transform-origin: center;
+  transition: transform 0.3s;
+  z-index: 10;
+}
+
+/* 产品悬浮 */
+.furniture-container:hover {
+  transform: scale(1.05) !important;
+}
+
+/* 3.2 每个产品图片 */
+.furniture-img {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.25));
+}
+
+/* 踢脚阴影 */
+#bathroom_base__trim_container .furniture-img {
+  filter: drop-shadow(0px -1px 3px rgba(0, 0, 0, 0.2));
+  border: solid red;
+  z-index: 1000000;
+}
+
+/* 3.3 每个产品类型名称 */
+.category-name,
+.category-name-grid {
+  position: relative;
+  background: transparent;
+  color: rgb(116, 116, 116);
+  box-shadow: none;
+  font-size: var(--category-name-ft-size);
+  font-weight: 400;
+  line-height: var(--category-name-line-height);
+  text-transform: capitalize;
+  white-space: nowrap;
+  z-index: 15;
+
+  text-shadow:
+    0px 0px 1px #ffffffd5,
+    0px 0px 1px #ffffff67;
+}
+.category-name-grid {
+  color: rgb(88, 76, 76, 0.5);
+}
+
+/* 3.4 特殊产品标签位置 */
+/* 踢脚 */
+#base__trim_container {
+  overflow: visible;
+}
+#base__trim_container .brand-price-wrapper {
+  position: absolute;
+  transform: translateY(calc(var(--base__trim-height) * (-1) - 30px));
+}
+#base__trim_container .category-name {
+  position: absolute;
+  transform: translateY(calc(var(--base__trim-height) * (-1) + 10px));
+}
+
+/* 洗手盆 */
+#bathroom_vanity_container .brand-price-wrapper,
+#bathroom_vanity_container .category-name {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  white-space: nowrap;
+}
+
+/* 水龙头 */
+#bathroom_vanity__faucet_container .brand-price-wrapper,
+#bathroom_vanity__faucet_container .category-name {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  white-space: nowrap;
+}
+
+/* 壁灯 */
+#bathroom_sconce_container .category-name {
+  transform: translateY(-60px) !important;
+}
+#bathroom_sconce_container .brand-tag,
+#bathroom_sconce_container .price-tag {
+  transform: translateY(-40px) !important;
+}
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 4.产品定位 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 4.产品定位 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+
+/* 4.1.1 洗手台 */
+#bathroom_vanity_container {
+  top: var(--vanity-base);
+  left: var(--vanity-left);
+  width: var(--vanity-width);
+}
+/* 4.1.2 洗手台水龙头 */
+#bathroom_vanity__faucet_container {
+  top: var(--vanity__faucet-base);
+  left: var(--vanity__faucet-left);
+  width: var(--vanity__faucet-width);
+  /* height: var(--vanity__faucet-height); */
+}
+/* 4.1.3 卷纸架 */
+#bathroom_toilet__paper__holder_container {
+  bottom: var(--toilet__paper__holder-base);
+  left: var(--toilet__paper__holder-left);
+  width: var(--toilet__paper__holder-width);
+}
+/* 4.1.4 毛巾架 */
+#bathroom_towel__bar_container {
+  top: var(--towel__bar-base);
+  left: var(--towel__bar-left);
+  width: var(--towel__bar-width);
+}
+/* 4.2.1 花洒头 */
+#bathroom_shower__head_container {
+  top: var(--shower__head-base);
+  left: var(--shower__head-left);
+  width: var(--shower__head-width);
+}
+/* 4.2.2 手持花洒*/
+#bathroom_shower__handshower_container {
+  top: var(--shower__handshower-base);
+  left: var(--shower__handshower-left);
+  width: var(--shower__handshower-width);
+}
+
+/* 4.2.3 阀门 */
+#bathroom_shower__valve_container {
+  top: var(--shower__valve-base);
+  left: var(--shower__valve-left);
+  width: var(--shower__valve-width);
+}
+/* 4.2.4 浴缸水龙头 */
+#bathroom_tub__spout_container {
+  top: var(--bathroom_tub__spout-base);
+  left: var(--bathroom_tub__spout-left);
+  width: var(--bathroom_tub__spout-width);
+}
+
+/* 4.2.5 淋浴间门把手 */
+#bathroom_shower__pull_container {
+  top: var(--shower__pull-base);
+  left: var(--shower__pull-left);
+  width: var(--shower__pull-width);
+}
+
+/* 4.3.1 镜柜镜子 */
+#bathroom_mirror_container {
+  top: var(--mirror-base);
+  left: var(--mirror-left);
+  width: var(--mirror-width);
+}
+
+/* 4.3.2 镜顶灯*/
+#bathroom_mirror__header__light_container {
+  top: var(--mirror__header__light-base);
+  left: var(--mirror__header__light-left);
+  width: var(--mirror__header__light-width);
+}
+/* 4.3.3 壁灯 */
+#bathroom_sconce_container {
+  top: var(--sconce-base);
+  left: var(--sconce-left);
+  width: var(--sconce-width);
+  z-index: 1;
+}
+
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 4.产品定位 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 5. Brand+Price Tag ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+
+/* 包一层 wrapper，让品牌和价格在同一行 */
+.brand-price-wrapper {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+/* Brand+Price Tag 平面图 & 缩略图*/
+.brand-tag,
+.thumbnail-brand-tag,
+.price-tag,
+.thumbnail-price-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  overflow: hidden;
+  letter-spacing: -0.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 20;
+}
+/* Brand+Price Tag 平面图*/
+.brand-tag,
+.price-tag {
+  position: relative;
+  bottom: -1px;
+  max-width: 100%;
+  height: var(--brandprice-height);
+  font-size: var(--brandprice-ft-size);
+  transform: translateY(100%) !important;
+}
+
+/* Price Tag模拟白底，防止材质图片颜色过深显示不明显 */
+.price-tag {
+  text-shadow:
+    0px 0px 20px #ffffffeb,
+    0px 0px 20px #ffffff67,
+    0px 0px 20px #ffffffde,
+    0px 0px 20px #ffffff67;
+}
+
+/* Brand+Price Tag 平面图悬停动画 */
+.furniture-container:hover .brand-tag,
+.furniture-container:hover .price-tag {
+  transform: translateY(100%) scale(1.05);
+}
+/* Brand Tag 平面图 */
+.brand-tag {
+  border-radius: 2px;
+  background: var(--brand-color);
+  color: var(--brand-font-color);
+}
+/* 背景Material brand+Price位置 */
+.background-container .brand-price-wrapper {
+  top: 0;
+}
+/* Price Tag 平面图 & 缩略图*/
+.price-tag,
+.thumbnail-price-tag {
+  background: rgba(0, 0, 0, 0);
+  color: black;
+  font-family: "Segoe UI Semibold", "Segoe UI", sans-serif;
+  font-weight: 500;
+}
+/* Brand+Price Tag 缩略图 */
+.thumbnail-tag-container {
+  display: flex;
+  margin-top: 2px;
+  width: 100%;
+}
+.thumbnail-brand-tag,
+.thumbnail-price-tag {
+  position: relative;
+  height: var(--brandprice-thumb-height);
+  font-size: var(--brandprice-thumb-ft-size);
+}
+/* 特殊情况：Existing产品Price Tag */
+.price-tag-existing {
+  background: rgba(190, 190, 190, 1) !important;
+  color: white !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  font-weight: 200 !important;
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 5. Brand+Price Tag ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 6.缩略图 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 6.1 缩略图栏 */
+#thumbnails-section {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* padding: 0; */
+  padding-bottom: calc(var(--btn-height) + var(--btn-to-screen-edge) + 0px);
+  max-width: 100%;
+  /* border-top: 1px solid #ddd; */
+  background: rgba(255, 255, 255, 1);
+  z-index: 25;
+  /* border:solid red; */
+}
+/* 6.1 缩略图栏显示 */
+#thumbnails-section.active {
+  display: flex;
+}
+/* 6.1 middle-controls-container */
+#thumbnails-wrapper {
+  display: flex;
+  align-items: flex-end;
+  overflow-x: auto;
+  padding: 5px;
+  /* padding: 0px; */
+  gap: 12px;
+  max-width: 100%;
+}
+
+/* 6.2 每个缩略图容器（含 Brand+Price Tag) */
+.thumbnail-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+.thumbnail-container:hover {
+  border: 1px solid #999;
+}
+
+/* 6.2.1 每个缩略图 */
+.thumbnail {
+  height: 85px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* 6.2.1 特殊情况 */
+/* 毛巾架缩略图限定宽度 */
+.thumbnail-container:has(.thumbnail[src*="towel"]) .thumbnail {
+  max-width: 300px;
+}
+
+/* 卷纸架缩略图限定宽度 */
+.thumbnail-container:has(.thumbnail[src*="holder"]) .thumbnail {
+  max-width: 100px;
+}
+
+/* 顶灯缩略图限定宽度 */
+.thumbnail-container:has(.thumbnail[src*="header__light"]) .thumbnail {
+  max-width: 200px;
+}
+
+/* 6.3 加载缩略图占位符，防止跳动 */
+.thumbnail.loading {
+  background: #f5f5f5;
+  opacity: 0.5;
+}
+/* 6.3 选中的缩略图 */
+.thumbnail-container.selected {
+  /* background: rgba(209, 198, 38, 0.236); */
+  border: 1px solid rgba(102, 67, 39, 0.5);
+}
+
+/* 6.4 middle-controls-containerr水平滚动条 */
+/* 滚动条背景 */
+#thumbnails-wrapper::-webkit-scrollbar {
+  height: var(--scrollbar-size);
+  background: var(--scrollbar-background-color);
+}
+/* 滚动条颜色 */
+#thumbnails-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: calc(var(--scrollbar-size) / 2);
+}
+/* 滚动条悬停颜色 */
+#thumbnails-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-hover-color);
+}
+/* 滚动条隐藏箭头 */
+#thumbnails-wrapper::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 6.缩略图 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 7. 产品详情 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 7.1 产品详情框 */
+.product-info {
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  max-width: 90%;
+  max-height: 90vh;
+  border: 5px solid rgba(255, 255, 255, 1);
+  background: rgba(245, 244, 240, 1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(5px) !important;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+  z-index: 1000;
+  /* border:solid red; */
+}
+.product-info.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+/* 7.2 产品名称容器 */
+.product-header {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* 7.2 产品名称文字 */
+.product-header h3 {
+  margin: 0;
+  font-size: var(--product-name-ft-size);
+  font-weight: 500;
+  color: #333;
+}
+/* 7.2 产品链接 */
+.product-title-link {
+  display: block;
+  flex-grow: 1;
+  padding-right: 30px;
+  color: inherit;
+  text-decoration: none;
+}
+/* 7.2 产品链接悬停 */
+.product-title-link:hover h3 {
+  text-decoration: underline;
+}
+/* 7.3 产品信息 */
+.product-data {
+  margin: 5px 0;
+  font-size: var(--product-data-ft-size);
+}
+/* 7.3.1 每行产品信息 */
+.product-data-row {
+  display: flex;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+/* 7.3.2 属性名称 */
+.product-data-property-name {
+  font-weight: 500;
+  width: 70px;
+  flex-shrink: 0;
+  color: #333;
+}
+/* 7.3.3 属性值 */
+.product-data-property-value {
+  font-weight: 400;
+  flex-grow: 1;
+  color: #333;
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 7. 产品详情 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 8. 缩略图按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 8. 中间按钮 & 右下角按钮容器位置 */
+#middle-controls-container,
+#bottom-right-controls-container {
+  position: fixed;
+  display: flex;
+  bottom: var(--btn-to-screen-edge);
+  z-index: 35;
+}
+/* 8. 中间按钮容器 */
+#middle-controls-container {
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* 8.1 缩略图按钮 */
+#toggle-thumbnail-btn {
+  border: none;
+  background: transparent;
+}
+/* 8.1 缩略图按钮灰色 */
+#toggle-thumbnail-btn-img {
+  transition: filter 0.3s;
+  filter: invert(70%);
+}
+/* 8.1 缩略图按钮悬停加深 */
+#toggle-thumbnail-btn:hover #toggle-thumbnail-btn-img {
+  filter: invert(0);
+}
+/* 8.1 缩略图按钮悬停隐藏提示 */
+#toggle-thumbnail-btn:hover::after {
+  opacity: 0;
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 8. 缩略图按钮 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 9. 右下角按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 9. 右下角按钮容器 */
+#bottom-right-controls-container {
+  align-items: flex-end;
+  right: var(--btn-to-screen-edge);
+  /* border:solid red; */
+}
+
+/* 9.1 所有按钮 */
+/* 9.1 所有按钮外观 */
+.options-btn,
+.command-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -1px;
+  width: var(--btn-width);
+  height: var(--btn-height);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+  font-size: var(--btn-ft-size);
+  font-weight: bold;
+  cursor: pointer;
+}
+/* 9.1 所有按钮悬停加深 */
+.options-btn:hover,
+.command-btn:hover,
+#toggle-brand-btn.active:hover,
+#toggle-items-btn.active:hover {
+  background: var(--btn-hover-color);
+}
+/* 9.1.1 update option按钮悬停加深（只在不被禁用时生效） */
+#update-btn.btn-hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 9.2 Option按钮 */
+/* Option按钮容器 */
+#option-buttons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  margin-right: 20px;
+  /* border:solid blue; */
+}
+
+/* Option按钮外观 */
+.options-btn {
+  padding: 0 10px;
+  width: auto !important;
+  min-width: 60px;
+}
+/* 当前Option按钮高亮 */
+.options-btn.active {
+  background: var(--btn-activeoption-color);
+  color: white;
+}
+.options-btn.active:hover {
+  background: var(--btn-activeoption-hover-color);
+}
+
+/* Option按钮悬停显示价格 */
+.option-cost-hint {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 1px;
+  background: rgba(234, 60, 60, 1);
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: var(--btn-hover-cost-ft-size);
+  font-weight: 400;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  z-index: 35;
+}
+
+/* 9.3 Option排序弹窗样式 */
+/* 9.3.1 弹窗灰色背景遮罩 */
+.modal {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+}
+
+/* 9.3.2 弹窗容器 */
+.modal-content {
+  width: 400px;
+  max-width: 90%;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 9.3.2.1 顶部 -> 弹窗标题*/
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  height: 60px;
+  border-bottom: 1px solid var(--optionlist-border);
+}
+/* 顶部 -> 弹窗标题文字 */
+.modal-title {
+  font-size: 12px;
+  color: var(--optionlist-text);
+}
+/* 顶部 -> 弹窗X */
+.modal-close {
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--optionlist-text);
+}
+/* 顶部 -> 弹窗X悬浮 */
+.modal-close:hover {
+  color: var(--optionlist-hover);
+}
+
+/* 9.3.2.2 中部 */
+.modal-body {
+  padding: 15px 5px;
+  max-height: 500px;
+  overflow-y: auto;
+  /* border:solid red; */
+}
+
+/* 中部 -> 列表区域 */
+.sort-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  /* padding:0 30px; */
+  /* border:solid red; */
+}
+
+/* 中部 -> 列表区域 -> 每个排序项 */
+.sort-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0px 20px;
+  height: 40px;
+  transition: background 0.2s;
+  /* cursor: pointer; */
+  /* border-top: 1px solid rgb(219, 219, 219); */
+}
+.sort-item,
+.sort-item * {
+  /* color: var(--optionlist-text); */
+  cursor: pointer;
+}
+/* 中部 -> 列表区域 -> 每个排序项 -> 
+悬浮 */
+.sort-item:hover,
+.sort-item.selected:hover {
+  background: var(--optionlist-hover-bg);
+}
+/* 中部 -> 列表区域 -> 每个排序项 -> 
+选中 */
+.sort-item.selected {
+  background: var(--optionlist-selected);
+  font-weight: 500;
+}
+
+/* 中部 -> 列表区域 -> 每个排序项 -> 
+checkbox */
+.sort-item-checkbox-wrapper {
+  position: relative;
+  width: 15px;
+  height: 15px;
+}
+
+/* 中部 -> 隐藏系统自带checkbox */
+.sort-item-checkbox {
+  display: none;
+}
+
+/* 中部 -> 自定义checkbox */
+.sort-item-custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--optionlist-basic);
+  background: white;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 中部 -> 自定义checkbox ->
+悬停 */
+.sort-item-custom-checkbox:hover {
+  /* border-color:var(--optionlist-basic); */
+  background: var(--optionlist-hover-bg);
+}
+
+/* 中部 -> 自定义checkbox ->
+选中 */
+.sort-item-checkbox:checked + .sort-item-custom-checkbox::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  color: white;
+}
+
+.sort-item-checkbox:checked + .sort-item-custom-checkbox {
+  background: var(--optionlist-basic);
+}
+
+/* 中部 -> Option名称 */
+.sort-item-name {
+  flex: 1;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+/* 中部 -> 价格容器 */
+.sort-item-price-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* 中部 -> 价格容器 -> 价格文本 */
+.sort-item-price {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* 中部 -> 价格容器 -> 价格缺失警告 */
+.sort-item-warning {
+  font-size: 12px;
+  filter: brightness(0.9);
+}
+
+/* 中部 -> 价格容器 -> 价格缺失警告tooltip */
+.custom-tooltip {
+  position: fixed;
+  align-content: center;
+  margin-left: 20px;
+  padding: 6px 10px;
+  height: 40px;
+  background: var(--optionlist-hover-bg);
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: var(--warning-text);
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10001;
+}
+
+/* 底部 */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid var(--optionlist-border);
+}
+/* 底部 -> 箭头容器 */
+.footer-left {
+  display: flex;
+  gap: 5px;
+  /* border: solid red; */
+}
+
+/*  底部 -> 箭头容器 -> 按钮 */
+.sort-control-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 30px;
+  border: 1px solid var(--optionlist-text);
+  border-radius: 4px;
+  background: var(--optionlist-btn);
+  color: white;
+  cursor: pointer;
+}
+
+/*  底部 -> 箭头容器 -> 按钮禁用 */
+.sort-control-btn:disabled {
+  background: white;
+  color: var(--optionlist-text);
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/*  底部 -> 箭头容器 -> 按钮激活
+-> 悬浮 */
+.sort-control-btn:hover:not(:disabled) {
+  background: var(--optionlist-btn-hover);
+  color: white;
+}
+
+/* 底部 -> 箭头容器 -> 绘制线条 */
+.sort-control-btn svg {
+  display: block;
+  width: 44px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 移除禁用按钮的红色圆圈 */
+/* .sort-control-btn:disabled::-moz-focus-inner {
+  border: 0;
+} */
+
+/* .sort-control-btn:disabled:focus {
+  outline: none;
+} */
+
+/* 底部 -> SAVE按钮容器 */
+.footer-right {
+  display: flex;
+}
+
+/* 底部 -> SAVE按钮 */
+.modal-btn {
+  width: 70px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  background: white;
+  font-size: 13px;
+  cursor: pointer;
+  color: white;
+  background: var(--optionlist-btn);
+}
+/* 底部 -> SAVE按钮 -> 悬浮*/
+.modal-btn:hover {
+  background: var(--optionlist-btn-hover);
+}
+
+/* 9.4 Command按钮 */
+/* Command按钮图标 */
+.command-btn img {
+  width: 60%;
+  height: 60%;
+}
+/* Command按钮悬停提示 */
+.command-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  padding: 4px 8px;
+  background: white;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: var(--btn-ft-size);
+  font-weight: 400;
+  text-transform: capitalize;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 0.3s;
+  z-index: 50;
+}
+.command-btn:hover::after {
+  opacity: 1;
+}
+/* Update成功提示 */
+.update-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 15px 30px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: var(--notification-ft-size);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s;
+  z-index: 1000;
+}
+.update-notification.show {
+  opacity: 1;
+}
+
+/* 9.5 Show Brand/Item List按钮 */
+/* Show Brand/Item List按钮激活状态 */
+#toggle-brand-btn.active,
+#toggle-items-btn.active {
+  background: black;
+}
+/* Show Brand/Item List按钮激活状态图片反色 */
+#toggle-brand-btn.active img,
+#toggle-items-btn.active img {
+  filter: invert(100%);
+}
+/* Show Brand/Item List按钮激活状态悬停图片恢复默认 */
+#toggle-brand-btn.active:hover img,
+#toggle-items-btn.active:hover img {
+  filter: invert(0);
+}
+
+/* 9.6 Item List按钮 */
+/* 9.6.1 Item List 面板 */
+.items-panel {
+  position: absolute;
+  /* display: flex; */
+  display: none;
+  overflow: hidden;
+  flex-direction: column;
+  top: 0;
+  bottom: calc(var(--btn-height) + 20px); /* 按钮上方 */
+  right: 0;
+  padding: 0 20px;
+  width: 280px;
+  height: var(--background-height);
+  transform: translate(100%);
+  z-index: 10;
+}
+
+.items-list-container {
+  overflow-y: auto;
+  flex: 1;
+  padding: 25px 0;
+}
+
+.group-title {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  color: var(--itemlist-text);
+  font-size: 11px;
+}
+
+.group-title:first-of-type {
+  margin-top: 0;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item-row input {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.item-row label {
+  flex: 1;
+  color: var(--itemlist-text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* 9.6.2 Checkbox */
+/* 隐藏原生 checkbox */
+.item-row input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  border: solid var(--itemlist-text) 1px;
+  transition: all 0.3s ease;
+}
+
+/* 选中状态 */
+.item-row input[type="checkbox"]:checked {
+  background: var(--itemlist-selected);
+}
+
+/* 对勾符号 */
+.item-row input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  font-size: 8px;
+  transform: translate(-50%, -50%);
+}
+
+/* 悬停效果 */
+/* .item-row input[type="checkbox"]:hover {
+  background: var(--itemlist-hover-text);
+} */
+
+.item-row:hover input[type="checkbox"] {
+  background: var(--itemlist-hover-text);
+}
+.item-row:hover label {
+  color: var(--itemlist-hover-text);
+}
+
+.item-row:hover input[type="checkbox"]:checked {
+  background: var(--itemlist-hover-text);
+}
+
+.furniture-container.hidden-category,
+.background-container.hidden-category {
+  display: none !important;
+}
+/* 9.6 Item List按钮 */
+
+/* 9.7 Export按钮 */
+/* Export按钮禁用提示 */
+#export-option::after,
+.export-row-container .command-btn::after {
+  content: none !important;
+}
+/* 9.7.1 Export按钮子菜单 */
+#export-view-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: calc(100% + 5px);
+  right: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  /* Export按钮子菜单间隙 */
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: transparent;
+  }
+}
+/* 9.7.1 Export按钮悬浮显示子菜单 */
+#export-option:hover + #export-view-container,
+#export-option:hover ~ #export-view-container,
+#export-view-container:hover,
+#export-view-container:hover::before {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 9.7.2 Export按钮子菜单横条 */
+.export-row-container {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  cursor: pointer;
+}
+.export-row-container:hover {
+  background-color: var(--btn-hover-color);
+}
+/* 9.7.2.1 Export按钮子菜单文字 */
+.export-option-text {
+  font-size: var(--btn-ft-size);
+  color: rgba(0, 0, 0, 0.8);
+  margin-left: 8px;
+  white-space: nowrap;
+  text-align: left;
+  flex-grow: 1;
+}
+/* 9.7.2.2 Export按钮子菜单图标 */
+.export-row-container,
+.export-row-container .command-btn {
+  background: transparent;
+  border: none !important;
+}
+
+/* 10. 日期 */
+.date-footer-container-main,
+.date-footer-container-table,
+.date-footer-container-grid {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  bottom: 0;
+  left: 0;
+  margin: 0 var(--export-LR-padding);
+  width: calc(100% - 2 * var(--export-LR-padding));
+  height: var(--date-height);
+  background: white;
+  color: #777;
+  font-size: var(--date-ft-size);
+  text-align: right;
+  z-index: 1000;
+}
+.date-footer-container-main {
+  display: none;
+}
+
+/* 11. VANITY辅助线 */
+.construction-line {
+  position: fixed;
+  border: solid red 1px;
+  opacity: 0.5;
+  height: 100vh;
+  left: 1004px;
+  z-index: 100;
+  visibility: hidden;
+}
+
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 浏览器 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 打印页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+@media print {
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 打印页面 - 标题 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* 打印页面 - 项目标题 */
+  .project-title-main,
+  .project-title-table,
+  .project-title-grid {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+  }
+  /* Option标题容器-main */
+  .header-container-main {
+    display: flex;
+    width: var(--split-container-width);
+    padding: 0;
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    top: 40px;
+    /* padding: 0 var(--export-LR-padding); */
+    /* width: 100%; */
+    height: var(--option-header-height);
+    border-bottom: 1px solid transparent;
+    background: white;
+    z-index: 1000;
+  }
+
+  .estimated-cost-header-main {
+    padding: 0;
+  }
+  /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 打印页面 - 标题 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 打印页面 - 主体元素 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  .element-container-main {
+    /* 必须是transform，不能用top, margin, padding, 否则dressing table打印时会错位 */
+    transform: translateY(var(--option-header-height));
+  }
+
+  /* 干区墙面下部 - 手动调整偏移 */
+  #dry__wall__lower_container .background-placeholder img {
+    left: 0px;
+    top: -270px;
+  }
+
+  /* 湿区墙面 - 手动调整偏移 */
+  #wet__wall_container .background-placeholder img {
+    left: -650px;
+  }
+
+  /* 干区地面 - 手动调整偏移*/
+  #dry__floor_container .background-placeholder img {
+    top: 0;
+  }
+
+  /* 湿区地面 - 手动调整偏移 */
+  #wet__floor_container .background-placeholder img {
+    left: -650px;
+    top: 0;
+  }
+  /* 踢脚 */
+  #base__trim_container .brand-price-wrapper,
+  #base__trim_container .category-name {
+    transform: translateY(calc(var(--base__trim-height) * (-1) - 5px));
+  }
+  #base__trim_container .brand-price-wrapper {
+    position: absolute;
+    transform: translateY(calc(var(--base__trim-height) * (-1) - 30px));
+  }
+  #base__trim_container .category-name {
+    position: absolute;
+    transform: translateY(calc(var(--base__trim-height) * (-1) + 10px));
+  }
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 打印页面 - 4.产品定位 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 打印页面 -  5. Brand+Price Tag ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* .brand-tag,
+    .price-tag {
+        font-size: 13px !important;
+    } */
+
+  /* 9. 打印页面 - 右下角按钮容器 */
+  #bottom-right-controls-container,
+  #middle-controls-container {
+    display: none !important;
+  }
+
+  /* 9.5 Item List按钮 */
+  /* 9.5.1 Item List 面板 */
+  .items-panel {
+    visibility: hidden;
+  }
+
+  /* 10. 打印页面 - 日期 */
+  .date-footer-container-main,
+  .date-footer-container-table,
+  .date-footer-container-grid {
+    display: block;
+    font-weight: 200;
+  }
+
+  /* 11. 辅助线 */
+  #grid-canvas-button,
+  #grid-canvas {
+    visibility: hidden;
+  }
+}
+
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 打印页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ export-table.js & export.grid.js ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+body.page-container-table,
+body.page-container-grid {
+  visibility: hidden;
+}
+
+#loading-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ export-table.js & export.grid.js ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */

@@ -1,0 +1,168 @@
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 基础设置 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* body设置 */
+.page-container-grid {
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  height: 100vh;
+  background: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* 项目标题 & Option标题在main.css */
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 基础设置 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 主体部分（不含日期） ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+.body-container-grid {
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  flex: 1;
+  margin-top: var(--project-title-header-height);
+  margin-bottom: var(--date-height);
+  padding: 0 var(--export-LR-padding) !important;
+  width: 100%;
+  min-height: 0;
+  background: white;
+}
+/* Option标题容器 */
+.header-container-grid {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  top: var(--project-title-header-height);
+  left: 0;
+  margin: 0 var(--export-LR-padding);
+  width: calc(100% - 2 * var(--export-LR-padding));
+  height: var(--option-header-height);
+  border-bottom: 1px solid #ccc;
+  background: white;
+  z-index: 30;
+}
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 3. 图片部分 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+#content-container-grid {
+  margin-top: var(--option-header-height);
+}
+
+/* 3.1 每一个location的section */
+.location-wrapper-grid {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.location-wrapper-grid:not(:first-child) {
+  border-top: 1px solid #ccc;
+}
+
+/* 3.2 location标题部分 */
+.location-wrapper-name-grid {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+/* 3.3 location图片部分 */
+.furniture-section-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 45px;
+  justify-content: left;
+  max-height: calc(100% - 40px);
+  padding: 5px;
+}
+/* 3.4 每个产品容器 */
+.furniture-container-grid {
+  display: inline;
+  flex-direction: column;
+  align-items: center;
+}
+/* 3.4.1 每个产品类型名称 */
+.category-name-grid {
+  margin-bottom: 5px;
+  color: rgb(88, 76, 76, 0.8);
+}
+/* 3.4.2 每个产品图片 */
+.furniture-img-grid {
+  height: 150px;
+  width: auto;
+  max-width: 350px;
+  object-fit: contain;
+}
+
+/* 3.4.3 特殊产品图片尺寸宽度限制 */
+/* 洗手台 */
+.furniture-img-grid[src*="vanity"] {
+  max-width: 400px !important;
+}
+/* 水龙头 */
+.furniture-img-grid[src*="vanity__faucet"] {
+  max-width: 200px !important;
+}
+/* 卷纸架 */
+.furniture-img-grid[src*="holder"] {
+  max-width: 200px !important;
+}
+
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 3. 图片部分 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 4. Brand+Price Tag ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 4. Brand+Price Tag */
+.brand-price-tag-container-grid {
+  display: flex;
+  justify-content: flex-start;
+}
+.brand-tag-grid {
+  margin-right: 2px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.price-tag-grid {
+  padding: 2px 4px;
+  background: rgba(255, 255, 255, 0.8);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 4. Brand+Price Tag ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 5. 滚动条 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+/* 滚动条背景 */
+.body-container-grid::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  background: var(--scrollbar-background-color);
+}
+/* 滚动条颜色 */
+.body-container-grid::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: calc(var(--scrollbar-size) / 2);
+}
+/* 滚动条悬停颜色 */
+.body-container-grid::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-hover-color);
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 5. 滚动条 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 浏览器 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 打印页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+@media print {
+  .furniture-img-grid {
+    height: 150px;
+  }
+}
