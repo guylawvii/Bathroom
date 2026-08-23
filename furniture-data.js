@@ -5,7 +5,8 @@
 // "r2"     = Cloudflare R2（以后使用）
 // ============================================================
 
-const IMAGE_SOURCE = "local";
+// const IMAGE_SOURCE = "local";
+const IMAGE_SOURCE = "github";
 
 const GITHUB_RAW_BASE =
   "https://raw.githubusercontent.com/guylawvii/Bathroom/deploy/netlify/";
