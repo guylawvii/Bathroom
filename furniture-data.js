@@ -18,9 +18,18 @@ function imagePath(path) {
     return path;
   }
 
-  if (IMAGE_SOURCE === "github") {
-    return GITHUB_RAW_BASE + path.split(" ").join("%20");
-  }
+if (IMAGE_SOURCE === "github") {
+    const githubPath = path.replace(
+        /(^|\/)bathroom_([^/]+)/g,
+        (_, prefix, name) =>
+            prefix +
+            "Bathroom_" +
+            name.charAt(0).toUpperCase() +
+            name.slice(1)
+    );
+
+    return GITHUB_RAW_BASE + githubPath.split(" ").join("%20");
+}
 
   if (IMAGE_SOURCE === "r2") {
     return R2_BASE + path.split(" ").join("%20");
