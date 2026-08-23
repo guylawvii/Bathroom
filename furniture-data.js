@@ -1,82 +1,94 @@
+// ============================================================
+// 图片来源开关
+// "local"  = 本地图片 / 当前 Netlify 方式
+// "github" = GitHub Raw
+// "r2"     = Cloudflare R2（以后使用）
+// ============================================================
+
+const IMAGE_SOURCE = "local";
+
+const GITHUB_RAW_BASE =
+  "https://raw.githubusercontent.com/guylawvii/Bathroom/deploy/netlify/";
+
+const R2_BASE = "https://你的R2图片域名/";
+
+function imagePath(path) {
+  if (IMAGE_SOURCE === "local") {
+    return path;
+  }
+
+  if (IMAGE_SOURCE === "github") {
+    return GITHUB_RAW_BASE + path.split(" ").join("%20");
+  }
+
+  if (IMAGE_SOURCE === "r2") {
+    return R2_BASE + path.split(" ").join("%20");
+  }
+
+  return path;
+}
+
 const product_image_Large = {
-  bathroom_sconce: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_sconce(${i + 1}).png`,
+  bathroom_sconce: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_sconce(${i + 1}).png`),
   ),
-  bathroom_vanity: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_vanity(${i + 1}).png`,
+  bathroom_vanity: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_vanity(${i + 1}).png`),
   ),
-  bathroom_vanity__faucet: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_vanity__faucet(${i + 1}).png`,
+  bathroom_vanity__faucet: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_vanity__faucet(${i + 1}).png`),
   ),
-  bathroom_shower__head: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_shower__head(${i + 1}).png`,
+  bathroom_shower__head: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_shower__head(${i + 1}).png`),
   ),
-  bathroom_shower__valve: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_shower__valve(${i + 1}).png`,
+  bathroom_shower__valve: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_shower__valve(${i + 1}).png`),
   ),
-  bathroom_shower__handshower: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_shower__handshower(${i + 1}).png`,
+  bathroom_shower__handshower: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_shower__handshower(${i + 1}).png`),
   ),
 
-  bathroom_tub__spout: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_tub__spout(${i + 1}).png`,
+  bathroom_tub__spout: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_tub__spout(${i + 1}).png`),
   ),
-  bathroom_shower__pull: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_shower__pull(${i + 1}).png`,
+  bathroom_shower__pull: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_shower__pull(${i + 1}).png`),
   ),
-  bathroom_toilet__paper__holder: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_toilet__paper__holder(${i + 1}).png`,
+  bathroom_toilet__paper__holder: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_toilet__paper__holder(${i + 1}).png`),
   ),
 
-  bathroom_towel__bar: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_towel__bar(${i + 1}).png`,
+  bathroom_towel__bar: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_towel__bar(${i + 1}).png`),
   ),
 
-  bathroom_mirror: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_mirror(${i + 1}).png`,
+  bathroom_mirror: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_mirror(${i + 1}).png`),
   ),
 
-  bathroom_mirror__header__light: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_mirror__header__light(${i + 1}).png`,
+  bathroom_mirror__header__light: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_mirror__header__light(${i + 1}).png`),
   ),
 
-  bathroom_base__trim: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_base__trim(${i + 1}).png`,
+  bathroom_base__trim: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_base__trim(${i + 1}).png`),
   ),
 
   // 浴室墙面地面材料
-  bathroom_dry__wall: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_dry__wall(${i + 1}).png`,
+  bathroom_dry__wall: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_dry__wall(${i + 1}).png`),
   ),
-  bathroom_dry__wall__lower: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_dry__wall__lower(${i + 1}).png`,
+  bathroom_dry__wall__lower: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_dry__wall__lower(${i + 1}).png`),
   ),
-  bathroom_wet__wall: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/bathroom_wet__wall(${i + 1}).png`,
+  bathroom_wet__wall: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/bathroom_wet__wall(${i + 1}).png`),
   ),
-  bathroom_dry__floor: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/dry__floor(${i + 1}).png`,
+  bathroom_dry__floor: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/dry__floor(${i + 1}).png`),
   ),
-  bathroom_wet__floor: Array.from(
-    { length: 20 },
-    (_, i) => `Product images/wet__floor(${i + 1}).png`,
+  bathroom_wet__floor: Array.from({ length: 20 }, (_, i) =>
+    imagePath(`Product images/wet__floor(${i + 1}).png`),
   ),
 };
 
@@ -84,7 +96,10 @@ const product_image_Thumbnail = {};
 Object.keys(product_image_Large).forEach((category) => {
   product_image_Thumbnail[category] = [];
   for (let i = 0; i < 20; i++) {
-    const thumbPath = `Product images/${category}_thumb(${i + 1}).png`;
+    // const thumbPath = `Product images/${category}_thumb(${i + 1}).png`;
+    const thumbPath = imagePath(
+      `Product images/${category}_thumb(${i + 1}).png`,
+    );
     product_image_Thumbnail[category].push(thumbPath);
   }
 });
@@ -92,19 +107,19 @@ Object.keys(product_image_Large).forEach((category) => {
 // 将墙面和地面映射到同一个产品数据
 const bathroom_wall__finish_images = Array.from(
   { length: 20 },
-  (_, i) => `Product images/bathroom_wall__finish(${i + 1}).png`,
+  (_, i) => imagePath(`Product images/bathroom_wall__finish(${i + 1}).png`) ,
 );
 const bathroom_wall__finish_thumb = Array.from(
   { length: 20 },
-  (_, i) => `Product images/bathroom_wall__finish_thumb(${i + 1}).png`,
+  (_, i) => imagePath(`Product images/bathroom_wall__finish_thumb(${i + 1}).png`) ,
 );
 const bathroom_floor__finish_images = Array.from(
   { length: 20 },
-  (_, i) => `Product images/bathroom_floor__finish(${i + 1}).png`,
+  (_, i) => imagePath(`Product images/bathroom_floor__finish(${i + 1}).png`) ,
 );
 const bathroom_floor__finish_thumb = Array.from(
   { length: 20 },
-  (_, i) => `Product images/bathroom_floor__finish_thumb(${i + 1}).png`,
+  (_, i) => imagePath(`Product images/bathroom_floor__finish_thumb(${i + 1}).png`) ,
 );
 
 product_image_Large.bathroom_dry__wall = bathroom_wall__finish_images;
