@@ -9,9 +9,9 @@
 const IMAGE_SOURCE = "github";
 
 const GITHUB_RAW_BASE =
-  "https://raw.githubusercontent.com/guylawvii/Bathroom/deploy/netlify/";
+  "https://raw.githubusercontent.com/guylawvii/Bathroom/refs/heads/deploy/netlify/";
 
-const R2_BASE = "https://你的R2图片域名/";
+const R2_BASE = "https://R2图片域名/";
 
 function imagePath(path) {
   if (IMAGE_SOURCE === "local") {
