@@ -252,7 +252,7 @@ const brandColorAbbrList = {
     color: "rgb(84, 112, 139)",
     fontColor: "white",
   },
-    "Ws Bath": {
+  "Ws Bath": {
     abbreviation: "WS",
     color: "rgb(26, 157, 216)",
     fontColor: "white",
@@ -287,6 +287,9 @@ const defaultOptions = [
       bathroom_sconce: false,
       bathroom_base__trim: false,
       bathroom_shower__pull: false,
+      bathroom_wet__floor: false,
+      bathroom_dry__wall__lower: false,
+      bathroom_wet__wall: false,
     },
     rotations: {}, // 存储每个 category 的旋转角度
   },
@@ -317,6 +320,9 @@ const defaultOptions = [
       bathroom_sconce: false,
       bathroom_base__trim: false,
       bathroom_shower__pull: false,
+      bathroom_wet__floor: false,
+      bathroom_dry__wall__lower: false,
+      bathroom_wet__wall: false,
     },
     rotations: {}, // 存储每个 category 的旋转角度
   },

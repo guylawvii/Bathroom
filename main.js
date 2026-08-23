@@ -1163,7 +1163,7 @@ function renderItemsList() {
       categories: [
         "bathroom_dry__wall__lower",
         "bathroom_wet__wall",
-        // "bathroom_wet__floor",
+        "bathroom_wet__floor",
         "bathroom_base__trim",
       ],
     },
