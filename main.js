@@ -1473,6 +1473,16 @@ function preloadImage(url) {
     img.src = url;
   });
 }
+
+// 加载中LOADING 旋转图标
+function showLoadingSpinner() {
+  document.getElementById("loading-spinner").style.display = "flex";
+}
+
+function hideLoadingSpinner() {
+  document.getElementById("loading-spinner").style.display = "none";
+}
+
 async function validateAllOptions() {
   for (const option of savedOptions) {
     for (const category of Object.keys(option.selections)) {
@@ -1485,6 +1495,10 @@ async function validateAllOptions() {
     }
   }
 }
+
+
+
+
 //更新当前日期
 function updateCurrentDate() {
   const now = new Date();
@@ -1554,6 +1568,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   await validateAllOptions();
+
+  // 加载中LOADING 旋转图标
+  document.getElementById("loading-spinner").style.display = "none";
 
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
