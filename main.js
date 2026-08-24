@@ -1571,11 +1571,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     saveOptionsToLocalStorage();
   }
 
-  await validateAllOptions();
   showLoadingSpinner();
+  await validateAllOptions();
+
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
-    await  applyOptionChange(savedOptions[0]);
+    await applyOptionChange(savedOptions[0]);
   }
   hideLoadingSpinner();
   // 加载中LOADING 旋转图标
