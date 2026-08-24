@@ -1557,7 +1557,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   //     img.src = imagePath(img.dataset.imagePath);
   //   });
 
-
   // A 初始化变量
   initializeDOMReferences();
   // AddEventListner 添加按钮动作
@@ -1577,6 +1576,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   //   activeOptionIndex = 0;
   //   applyOptionChange(savedOptions[0]);
   // }
+
+  await validateAllOptions();
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
     await applyOptionChange(savedOptions[0]);
