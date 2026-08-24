@@ -1579,8 +1579,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     await applyOptionChange(savedOptions[0]);
   }
   hideLoadingSpinner();
-  // 加载中LOADING 旋转图标
-  document.getElementById("loading-spinner").style.display = "none";
 
   document.addEventListener("click", function (e) {
     if (
