@@ -748,9 +748,6 @@ async function applyOptionChange(option) {
   isApplying = true;
 
   try {
-    //显示 LOADING
-    showLoadingSpinner();
-
     // 你的原有代码保持不变，从下面这一行开始全部原样保留
     if (option) {
       await loadOption(option);
@@ -794,11 +791,6 @@ async function applyOptionChange(option) {
 
     // 应用完后禁用Apply按钮
     disableUpdateBtn();
-
-    // 等最终页面图片全部完成后，再关闭 Spinner
-    await waitForCurrentImages();
-    hideLoadingSpinner();
-  
   } finally {
     isApplying = false;
   }
@@ -1491,28 +1483,6 @@ function hideLoadingSpinner() {
   document.getElementById("loading-spinner").style.display = "none";
 }
 
-async function waitForCurrentImages() {
-  const images = Array.from(
-    document.querySelectorAll(".background-img, .furniture-img"),
-  );
-
-  await Promise.all(
-    images.map(async (img) => {
-      if (!img.complete) {
-        await new Promise((resolve) => {
-          img.addEventListener("load", resolve, { once: true });
-          img.addEventListener("error", resolve, { once: true });
-        });
-      }
-
-      if (img.complete && img.naturalWidth > 0) {
-        try {
-          await img.decode();
-        } catch (e) {}
-      }
-    }),
-  );
-}
 async function validateAllOptions() {
   for (const option of savedOptions) {
     for (const category of Object.keys(option.selections)) {
@@ -1602,13 +1572,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   await validateAllOptions();
-
+  showLoadingSpinner();
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
-    applyOptionChange(savedOptions[0]);
+    await  applyOptionChange(savedOptions[0]);
   }
+  hideLoadingSpinner();
   // 加载中LOADING 旋转图标
-  // document.getElementById("loading-spinner").style.display = "none";
+  document.getElementById("loading-spinner").style.display = "none";
 
   document.addEventListener("click", function (e) {
     if (
