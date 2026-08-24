@@ -1546,9 +1546,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 初始化主页 Main.html ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
   // HTML 静态图片统一根据 FURNITURE.JS里的IMAGE_SOURCE 设置实际路径（用于切换本地/GH RAW/CLOUDFLARE，避免通过NETLIFY加载）
-  document.querySelectorAll("img[data-image-path]").forEach((img) => {
-    img.src = imagePath(img.dataset.imagePath);
-  });
+  // document.querySelectorAll("img[data-image-path]").forEach((img) => {
+  //   img.src = imagePath(img.dataset.imagePath);
+  // });
+  document
+    .querySelectorAll(
+      "img[data-image-path]:not(.background-img):not(.furniture-img)",
+    )
+    .forEach((img) => {
+      img.src = imagePath(img.dataset.imagePath);
+    });
+
 
   // A 初始化变量
   initializeDOMReferences();
