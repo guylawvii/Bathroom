@@ -1571,20 +1571,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     saveOptionsToLocalStorage();
   }
 
-  // await validateAllOptions();
-  // if (savedOptions.length > 0) {
-  //   activeOptionIndex = 0;
-  //   applyOptionChange(savedOptions[0]);
-  // }
-
   await validateAllOptions();
+
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
-    await applyOptionChange(savedOptions[0]);
+    applyOptionChange(savedOptions[0]);
   }
-
   // 加载中LOADING 旋转图标
-  document.getElementById("loading-spinner").style.display = "none";
+  // document.getElementById("loading-spinner").style.display = "none";
 
   document.addEventListener("click", function (e) {
     if (
