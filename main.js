@@ -1475,13 +1475,13 @@ function preloadImage(url) {
 }
 
 // 加载中LOADING 旋转图标
-function showLoadingSpinner() {
-  document.getElementById("loading-spinner").style.display = "flex";
-}
+// function showLoadingSpinner() {
+//   document.getElementById("loading-spinner").style.display = "flex";
+// }
 
-function hideLoadingSpinner() {
-  document.getElementById("loading-spinner").style.display = "none";
-}
+// function hideLoadingSpinner() {
+//   document.getElementById("loading-spinner").style.display = "none";
+// }
 
 async function validateAllOptions() {
   for (const option of savedOptions) {
