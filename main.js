@@ -1496,9 +1496,6 @@ async function validateAllOptions() {
   }
 }
 
-
-
-
 //更新当前日期
 function updateCurrentDate() {
   const now = new Date();
@@ -1567,15 +1564,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     saveOptionsToLocalStorage();
   }
 
-  await validateAllOptions();
+  // await validateAllOptions();
+  // if (savedOptions.length > 0) {
+  //   activeOptionIndex = 0;
+  //   applyOptionChange(savedOptions[0]);
+  // }
+  if (savedOptions.length > 0) {
+    activeOptionIndex = 0;
+    await applyOptionChange(savedOptions[0]);
+  }
 
   // 加载中LOADING 旋转图标
   document.getElementById("loading-spinner").style.display = "none";
-
-  if (savedOptions.length > 0) {
-    activeOptionIndex = 0;
-    applyOptionChange(savedOptions[0]);
-  }
 
   document.addEventListener("click", function (e) {
     if (
