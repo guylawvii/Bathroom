@@ -1571,9 +1571,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     saveOptionsToLocalStorage();
   }
 
-  showLoadingSpinner();
-  await validateAllOptions();
 
+  await validateAllOptions();
+  showLoadingSpinner();
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
     await applyOptionChange(savedOptions[0]);
