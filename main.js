@@ -1579,7 +1579,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   hideLoadingSpinner();
   // 加载中LOADING 旋转图标
-  document.getElementById("loading-spinner").style.display = "none";
+  document.getElementById("loading-spinner").style.display = "flex";
 
   document.addEventListener("click", function (e) {
     if (
