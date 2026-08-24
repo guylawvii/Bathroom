@@ -1597,7 +1597,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   disableUpdateBtn();
 
   // 避免Export Grid Table 闪烁
-  preloadExportImages();
+  // preloadExportImages();
 
   // 从HTML获取产品显示名称
   buildDisplayNameMap();
