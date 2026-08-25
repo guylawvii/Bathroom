@@ -748,6 +748,8 @@ async function applyOptionChange(option) {
   isApplying = true;
 
   try {
+    // 加载中LOADING 旋转图标
+    showLoadingSpinner();
     // 你的原有代码保持不变，从下面这一行开始全部原样保留
     if (option) {
       await loadOption(option);
@@ -792,6 +794,8 @@ async function applyOptionChange(option) {
     // 应用完后禁用Apply按钮
     disableUpdateBtn();
   } finally {
+    // 隐藏加载中LOADING 旋转图标
+    hideLoadingSpinner();
     isApplying = false;
   }
 }
