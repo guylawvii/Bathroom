@@ -631,9 +631,20 @@ function writeOptionBtnHTML() {
       }
     });
     // CF_4.1.5 单击切换Option
-    btn.addEventListener("click", () => {
+    // btn.addEventListener("click", () => {
+    //   activeOptionIndex = index;
+    //   applyOptionChange(option);
+    // });
+    btn.addEventListener("click", async () => {
       activeOptionIndex = index;
-      applyOptionChange(option);
+
+      showPreLoadSpinner();
+
+      try {
+        await applyOptionChange(option);
+      } finally {
+        hidePreLoadSpinner();
+      }
     });
 
     // CF_4.1.6 双击重命名Option
@@ -1507,7 +1518,6 @@ function showLoadingSpinner() {
 function hideLoadingSpinner() {
   document.getElementById("Loading-spinner").style.display = "none";
 }
-
 
 async function validateAllOptions() {
   for (const option of savedOptions) {
