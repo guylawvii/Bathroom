@@ -616,9 +616,19 @@ function writeOptionBtnHTML() {
       }
     });
     // CF_4.1.5 单击切换Option
-    btn.addEventListener("click", () => {
+    // btn.addEventListener("click", () => {
+    //   activeOptionIndex = index;
+    //   applyOptionChange(option);
+    // });
+
+    btn.addEventListener("click", async () => {
       activeOptionIndex = index;
-      applyOptionChange(option);
+      // 加载中LOADING 旋转图标
+      showLoadingSpinner();
+
+      await applyOptionChange(option);
+      // 隐藏加载中LOADING 旋转图标
+      hideLoadingSpinner();
     });
     // CF_4.1.6 双击重命名Option
     btn.addEventListener("dblclick", () => {
@@ -748,8 +758,6 @@ async function applyOptionChange(option) {
   isApplying = true;
 
   try {
-    // 加载中LOADING 旋转图标
-    showLoadingSpinner();
     // 你的原有代码保持不变，从下面这一行开始全部原样保留
     if (option) {
       await loadOption(option);
@@ -794,8 +802,6 @@ async function applyOptionChange(option) {
     // 应用完后禁用Apply按钮
     disableUpdateBtn();
   } finally {
-    // 隐藏加载中LOADING 旋转图标
-    hideLoadingSpinner();
     isApplying = false;
   }
 }
@@ -1574,7 +1580,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     savedOptions.push(...defaultOptions);
     saveOptionsToLocalStorage();
   }
-
 
   await validateAllOptions();
   showLoadingSpinner();
