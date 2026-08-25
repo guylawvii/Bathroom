@@ -101,8 +101,8 @@ img {
 
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 标题 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
-/* 加载中LOADING 旋转图标 */
-#loading-spinner {
+/* ↓↓↓↓↓ 加载中LOADING 旋转图标(刷新网页时) ↓↓↓↓↓ */
+#preLoad-spinner {
   position: fixed;
   inset: 0;
   display: flex;
@@ -128,6 +128,47 @@ img {
     transform: rotate(360deg);
   }
 }
+/* ↑↑↑↑↑ 加载中LOADING 旋转图标(刷新网页时) ↑↑↑↑↑ */
+
+/* ↓↓↓↓↓ 加载中LOADING 图标(打开缩略图，切换产品和切换option时) ↓↓↓↓↓ */
+#Loading-spinner {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: 20%;
+  height:8px;
+  background: rgb(236, 236, 236);
+  border-radius: 999px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 99999;
+  display: none;
+}
+
+/* 移动中的进度块 */
+#Loading-spinner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: rgba(167, 167, 167, 0.833);
+  border-radius: 999px;
+  animation: loadingBarMove 1.2s linear infinite;
+}
+
+@keyframes loadingBarMove {
+  from {
+    left: -50%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+/* ↑↑↑↑↑ 加载中LOADING 图标(打开缩略图，切换产品和切换option时) ↑↑↑↑↑ */
 
 /* 左右布局容器 */
 .split-container {

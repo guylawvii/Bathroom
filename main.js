@@ -283,6 +283,9 @@ function updateIndexPlan(category) {
 // ↓↓↓↓↓↓↓↓↓↓↓↓ CF_2 缩略图 ↓↓↓↓↓↓↓↓↓↓↓↓
 // CF_2.1 创建middle-controls-container
 async function showThumbnails(category) {
+  // 显示加载中LOADING 图标(关闭缩略图)
+  showLoadingSpinner();
+
   // CF_2.1.1 如果所选 category 的缩略图还没有缓存，就创建 20 个缩略图容器，标记当前选中的缩略图为 selected，然后加载每个缩略图的图片内容，等待全部加载完成。
   if (!thumbnailCache[category]) {
     thumbnailCache[category] = [];
@@ -300,6 +303,8 @@ async function showThumbnails(category) {
     }
     await Promise.all(loadPromises);
   }
+  // 隐藏加载中LOADING 图标(关闭缩略图)
+  hideLoadingSpinner();
   // CF_2.1.2 清空缩略图显示区域，把缓存的缩略图容器克隆一份添加到页面（避免直接修改缓存），并重新标记当前选中的缩略图为 selected。
   thumbnailList.innerHTML = "";
   thumbnailCache[category].forEach((container) => {
@@ -418,6 +423,15 @@ function switchProduct(category, index) {
     `[data-category="${category}"] .furniture-img, [data-category="${category}"] .background-img`,
   );
   if (mainImg) {
+    // 显示加载中LOADING 图标（切换产品大图）
+    showLoadingSpinner();
+
+    mainImg.onload = function () {
+      // 关闭加载中LOADING 图标（切换产品大图）
+      hideLoadingSpinner();
+      mainImg.onload = null;
+    };
+
     mainImg.src = product_image_Large[category][index];
     currentSelection[category] = index;
 
@@ -426,6 +440,7 @@ function switchProduct(category, index) {
       updateSelectedBrandPrice(category);
     }
   }
+
   hideProductInfo();
 
   // CF_2.3.2 判断是否有产品选择是否有变化（缩略图 + item list）
@@ -616,20 +631,11 @@ function writeOptionBtnHTML() {
       }
     });
     // CF_4.1.5 单击切换Option
-    // btn.addEventListener("click", () => {
-    //   activeOptionIndex = index;
-    //   applyOptionChange(option);
-    // });
-
-    btn.addEventListener("click", async () => {
+    btn.addEventListener("click", () => {
       activeOptionIndex = index;
-      // 加载中LOADING 旋转图标
-      showLoadingSpinner();
-
-      await applyOptionChange(option);
-      // 隐藏加载中LOADING 旋转图标
-      hideLoadingSpinner();
+      applyOptionChange(option);
     });
+
     // CF_4.1.6 双击重命名Option
     btn.addEventListener("dblclick", () => {
       const newName = prompt("Edit option name:", option.name);
@@ -1484,14 +1490,24 @@ function preloadImage(url) {
   });
 }
 
-// 加载中LOADING 旋转图标
-function showLoadingSpinner() {
-  document.getElementById("loading-spinner").style.display = "flex";
+// 显示加载中LOADING 旋转图标(刷新网页时)
+function showPreLoadSpinner() {
+  document.getElementById("preLoad-spinner").style.display = "flex";
+}
+// 关闭加载中LOADING 旋转图标(刷新网页时)
+function hidePreLoadSpinner() {
+  document.getElementById("preLoad-spinner").style.display = "none";
 }
 
-function hideLoadingSpinner() {
-  document.getElementById("loading-spinner").style.display = "none";
+// 显示加载中LOADING 图标(打开缩略图，切换产品和切换option时)
+function showLoadingSpinner() {
+  document.getElementById("Loading-spinner").style.display = "flex";
 }
+// 关闭加载中LOADING 图标(打开缩略图，切换产品和切换option时)
+function hideLoadingSpinner() {
+  document.getElementById("Loading-spinner").style.display = "none";
+}
+
 
 async function validateAllOptions() {
   for (const option of savedOptions) {
@@ -1582,12 +1598,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   await validateAllOptions();
-  showLoadingSpinner();
+  // 显示加载中LOADING 旋转图标(刷新网页时)
+  showPreLoadSpinner();
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
     await applyOptionChange(savedOptions[0]);
   }
-  hideLoadingSpinner();
+  // 关闭加载中LOADING 旋转图标(刷新网页时)
+  hidePreLoadSpinner();
 
   document.addEventListener("click", function (e) {
     if (
