@@ -836,6 +836,24 @@ async function loadOption(option) {
     }
   }
 
+  // // CF_4.6.2 返回对应索引的产品图片
+  // Object.keys(option.selections).forEach((category) => {
+  //   currentSelection[category] = option.selections[category];
+
+  //   const img = document.querySelector(
+  //     `[data-category="${category}"] .furniture-img, [data-category="${category}"] .background-img`,
+  //   );
+  //   // 返回对应索引的图片
+  //   if (img) {
+  //     img.src = product_image_Large[category][option.selections[category]];
+  //   }
+
+  //   // 特殊产品
+  //   // 更新当前Option的Brand+Price
+  //   if (bool_ShowBrand) {
+  //     updateAllBrandPrice();
+  //   }
+  // });
   // CF_4.6.2 返回对应索引的产品图片
   Object.keys(option.selections).forEach((category) => {
     currentSelection[category] = option.selections[category];
@@ -854,6 +872,28 @@ async function loadOption(option) {
       updateAllBrandPrice();
     }
   });
+
+  // 等待当前页面所有背景图和产品图加载完成
+  const imageLoadPromises = [];
+
+  const imgs = [
+    ...document.querySelectorAll(".background-img, .furniture-img"),
+  ];
+
+  imgs.forEach((img) => {
+    if (!img.complete) {
+      imageLoadPromises.push(
+        new Promise((resolve) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true });
+        }),
+      );
+    }
+  });
+
+  await Promise.all(imageLoadPromises);
+
+  
 
   // CF_4.6.3 如果平面图上某个产品类别被选中
   if (lastClickedCategory) {
