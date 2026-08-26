@@ -661,6 +661,51 @@ function writeOptionBtnHTML() {
 }
 
 // CF_4.2 Update Option按钮
+// function updateActiveOption() {
+//   // 没有改变时禁用单击动作
+//   if (updateBtnEnabled === false) {
+//     return;
+//   }
+
+//   if (activeOptionIndex === -1) {
+//     alert("Please select an option!");
+//     return;
+//   }
+//   savedOptions[activeOptionIndex].selections = JSON.parse(
+//     JSON.stringify(currentSelection),
+//   );
+
+//   savedOptions[activeOptionIndex].itemVisibility = { ...currentItemVisibility };
+
+//   // 保存旋转角度
+//   const rotations = {};
+//   for (const [key, value] of currentAngleIndexMap.entries()) {
+//     // key 格式: "bathroom_dry__wall_0"
+//     // 提取真正的 category（去掉最后的 _数字）
+//     const lastUnderscoreIndex = key.lastIndexOf("_");
+//     const category = key.substring(0, lastUnderscoreIndex);
+//     rotations[category] = value;
+//   }
+//   savedOptions[activeOptionIndex].rotations = rotations;
+
+//   updateNotification.classList.add("show");
+//   updateNotification.innerHTML = `Option "${savedOptions[activeOptionIndex].name}" has been updated!`;
+
+//   setTimeout(() => {
+//     updateNotification.classList.remove("show");
+//   }, 1000);
+
+//   // 【唯一修改】传入深拷贝，避免 loadOption 修改 savedOptions 中的原对象
+//   const optionCopy = JSON.parse(
+//     JSON.stringify(savedOptions[activeOptionIndex]),
+//   );
+
+//   applyOptionChange(savedOptions[activeOptionIndex]);
+
+//   // 禁用Update按钮
+//   disableUpdateBtn();
+// }
+// CF_4.2 Update Option按钮
 function updateActiveOption() {
   // 没有改变时禁用单击动作
   if (updateBtnEnabled === false) {
@@ -671,22 +716,33 @@ function updateActiveOption() {
     alert("Please select an option!");
     return;
   }
+
+  // 保存当前选择
   savedOptions[activeOptionIndex].selections = JSON.parse(
     JSON.stringify(currentSelection),
   );
 
-  savedOptions[activeOptionIndex].itemVisibility = { ...currentItemVisibility };
+  // 保存当前物品显示/隐藏状态
+  savedOptions[activeOptionIndex].itemVisibility = {
+    ...currentItemVisibility,
+  };
 
-  // 保存旋转角度
+  // ========== 保存当前 Option 的旋转角度 ==========
+  // 只保存当前 Option 中每个 category 对应的 currentIndex，
+  // 避免不同图片 index 的旋转状态互相覆盖。
   const rotations = {};
-  for (const [key, value] of currentAngleIndexMap.entries()) {
-    // key 格式: "bathroom_dry__wall_0"
-    // 提取真正的 category（去掉最后的 _数字）
-    const lastUnderscoreIndex = key.lastIndexOf("_");
-    const category = key.substring(0, lastUnderscoreIndex);
-    rotations[category] = value;
+
+  for (const category in currentSelection) {
+    const currentIndex = currentSelection[category];
+    const key = `${category}_${currentIndex}`;
+
+    if (currentAngleIndexMap.has(key)) {
+      rotations[category] = currentAngleIndexMap.get(key);
+    }
   }
+
   savedOptions[activeOptionIndex].rotations = rotations;
+  // ========== 保存旋转角度结束 ==========
 
   updateNotification.classList.add("show");
   updateNotification.innerHTML = `Option "${savedOptions[activeOptionIndex].name}" has been updated!`;
@@ -695,16 +751,18 @@ function updateActiveOption() {
     updateNotification.classList.remove("show");
   }, 1000);
 
-  // 【唯一修改】传入深拷贝，避免 loadOption 修改 savedOptions 中的原对象
+  // 传入深拷贝，避免 loadOption 修改 savedOptions 中的原对象
   const optionCopy = JSON.parse(
     JSON.stringify(savedOptions[activeOptionIndex]),
   );
 
   applyOptionChange(savedOptions[activeOptionIndex]);
 
-  // 禁用Update按钮
+  // 禁用 Update 按钮
   disableUpdateBtn();
 }
+
+
 
 // CF_4.3 Create Option按钮
 function createNewOption() {
@@ -893,7 +951,7 @@ async function loadOption(option) {
 
   await Promise.all(imageLoadPromises);
 
-  
+
 
   // CF_4.6.3 如果平面图上某个产品类别被选中
   if (lastClickedCategory) {
@@ -1351,7 +1409,7 @@ function applyItemVisibility(visibility) {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓ CF_8 旋转背景材质图片角度 ↓↓↓↓↓↓↓↓↓↓↓↓
 // ↓↓↓↓↓↓↓↓↓↓↓↓ CF_8 旋转背景材质图片角度 ↓↓↓↓↓↓↓↓↓↓↓↓
-// 存储每个容器的当前角度索引
+// 存储每个容器的当前角度索引（用于当前会话）
 // 存储每个容器的当前角度索引（用于当前会话）
 const currentAngleIndexMap = new Map();
 

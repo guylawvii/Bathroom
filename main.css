@@ -109,7 +109,7 @@ img {
   justify-content: center;
   align-items: center;
   background: rgba(247, 247, 247, 0.176);
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 99999;
 }
