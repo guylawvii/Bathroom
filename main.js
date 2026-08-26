@@ -762,8 +762,6 @@ function updateActiveOption() {
   disableUpdateBtn();
 }
 
-
-
 // CF_4.3 Create Option按钮
 function createNewOption() {
   const optionName = prompt("Option Name", `Option${savedOptions.length + 1}`);
@@ -863,15 +861,31 @@ async function applyOptionChange(option) {
     }
 
     // ========== 新增：恢复旋转角度 ==========
+    // document
+    //   .querySelectorAll(".background-container, .furniture-container")
+    //   .forEach((container) => {
+    //     const category = container.dataset.category;
+    //     const img = container.querySelector(".background-img, .furniture-img");
+    //     if (category && img) {
+    //       initRotateIcon(container, category, img);
+    //     }
+    //   });
+
+    const rotateInitPromises = [];
+
     document
       .querySelectorAll(".background-container, .furniture-container")
       .forEach((container) => {
         const category = container.dataset.category;
         const img = container.querySelector(".background-img, .furniture-img");
+
         if (category && img) {
-          initRotateIcon(container, category, img);
+          rotateInitPromises.push(initRotateIcon(container, category, img));
         }
       });
+
+    await Promise.all(rotateInitPromises);
+
     // ========== 新增结束 ==========
 
     // 应用完后禁用Apply按钮
@@ -950,8 +964,6 @@ async function loadOption(option) {
   });
 
   await Promise.all(imageLoadPromises);
-
-
 
   // CF_4.6.3 如果平面图上某个产品类别被选中
   if (lastClickedCategory) {
@@ -1449,14 +1461,34 @@ async function initRotateIcon(container, category, imgElement) {
   currentAngleIndexMap.set(`${category}_${currentIndex}`, currentAngleIndex);
 
   // 恢复角度
-  const currentAngle = angles[currentAngleIndex];
-  if (currentAngle !== 0) {
-    const newSrc = `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`;
-    imgElement.src = newSrc;
-  } else {
-    // 没有保存的旋转角度，设置为默认图片
-    imgElement.src = product_image_Large[category][currentIndex];
-  }
+  // const currentAngle = angles[currentAngleIndex];
+  // if (currentAngle !== 0) {
+  //   const newSrc = `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`;
+  //   imgElement.src = newSrc;
+  // } else {
+  //   // 没有保存的旋转角度，设置为默认图片
+  //   imgElement.src = product_image_Large[category][currentIndex];
+  // }
+
+
+const currentAngle = angles[currentAngleIndex];
+
+const newSrc =
+  currentAngle !== 0
+    ? `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`
+    : product_image_Large[category][currentIndex];
+
+imgElement.src = newSrc;
+
+if (!imgElement.complete) {
+  await new Promise((resolve) => {
+    imgElement.addEventListener("load", resolve, { once: true });
+    imgElement.addEventListener("error", resolve, { once: true });
+  });
+}
+
+
+
   icon.onclick = (e) => {
     e.stopPropagation();
     currentAngleIndex = (currentAngleIndex + 1) % angles.length;
@@ -1491,14 +1523,44 @@ async function initRotateIcon(container, category, imgElement) {
 //   return img.complete && img.naturalHeight !== 0;
 // }
 
+// function imageExists(url) {
+//   return new Promise((resolve) => {
+//     const img = new Image();
+//     img.onload = () => resolve(true);
+//     img.onerror = () => resolve(false);
+//     img.src = url;
+//   });
+// }
+
 function imageExists(url) {
+  // 缓存每个 URL 的检查结果
+  if (!imageExists.cache) {
+    imageExists.cache = new Map();
+  }
+
+  // 如果之前检查过，直接返回缓存结果
+  if (imageExists.cache.has(url)) {
+    return Promise.resolve(imageExists.cache.get(url));
+  }
+
+  // 第一次检查图片是否存在
   return new Promise((resolve) => {
     const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
+
+    img.onload = () => {
+      imageExists.cache.set(url, true);
+      resolve(true);
+    };
+
+    img.onerror = () => {
+      imageExists.cache.set(url, false);
+      resolve(false);
+    };
+
     img.src = url;
   });
 }
+
 // ↑↑↑↑↑↑↑↑↑↑↑↑ CF_8 旋转背景材质图片角度 ↑↑↑↑↑↑↑↑↑↑↑↑
 // ↑↑↑↑↑↑↑↑↑↑↑↑ CF_8 旋转背景材质图片角度 ↑↑↑↑↑↑↑↑↑↑↑↑
 
