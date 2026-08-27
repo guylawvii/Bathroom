@@ -48,12 +48,12 @@
   --optionlist-hover-text: var(--itemlist-hover-text);
   --optionlist-hover-bg: rgb(241, 241, 241);
   --optionlist-selected: rgb(229, 229, 229);
-  --optionlist-border:rgb(221, 221, 221);
-  --optionlist-btn:var(--btn-activeoption-color);
-  --optionlist-btn-hover:var(--btn-activeoption-hover-color);
+  --optionlist-border: rgb(221, 221, 221);
+  --optionlist-btn: var(--btn-activeoption-color);
+  --optionlist-btn-hover: var(--btn-activeoption-hover-color);
 
   /* 1.8 价格缺失警告 *xxx not included */
-  --warning-text:rgb(220, 0, 0);
+  --warning-text: rgb(220, 0, 0);
 
   /* ↓↓↓↓↓↓ 导出页 ↓↓↓↓↓↓ */
   --export-LR-padding: 250px;
@@ -261,7 +261,6 @@
   }
 }
 
-
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ HP全屏 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 @media (min-height: 1100px) {
   :root {
@@ -269,9 +268,32 @@
   }
 }
 
-
-@media (max-width: 600px){
+@media (max-width: 600px) {
   :root {
-    --split-container-width: 480px;
+    /* 1.2 方案标题 */
+    --option-header-height: 70px;
+    --option-name-ft-size: 14px;
+
+    --split-container-width: 400px;
+
+    /* 1.4. 按钮 */
+    /* 1.4.1 按钮尺寸 */
+    /* --btn-width:40px;
+    --btn-height: var(--btn-width); */
+
+    /* 1.4.4 按钮字体 */
+    /* --btn-ft-size: 8px;
+    --btn-hover-cost-ft-size: 10px;
+    --notification-ft-size: 12px; */
+
+    /* 6. 产品标签 */
+    /* 6.1 产品标签 */
+    --category-name-ft-size: 8px;
+    --category-name-line-height: 12px;
+    /* 6.2 Brand + price标签 */
+    --brandprice-height: 12px;
+    --brandprice-ft-size: 8px;
+    --brandprice-thumb-ft-size: 8px;
+    --brandprice-thumb-height: 12px;
   }
 }

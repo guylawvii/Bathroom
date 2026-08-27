@@ -55,6 +55,8 @@ img {
   top: 0;
   width: var(--split-container-width);
   padding: 0;
+
+  top: var(--project-title-header-height);
 }
 
 /* Option标题 */
@@ -74,6 +76,7 @@ img {
   color: black;
   font-size: var(--option-name-ft-size);
   font-weight: 300;
+  /* border:red solid; */
 }
 
 .option-title-main,
@@ -155,7 +158,7 @@ img {
   bottom: 24px;
   transform: translateX(-50%);
   width: 20%;
-  height:8px;
+  height: 8px;
   background: rgb(236, 236, 236);
   border-radius: 999px;
   overflow: hidden;
@@ -952,6 +955,10 @@ img {
   gap: 0;
   margin-right: 20px;
   /* border:solid blue; */
+
+  flex-direction: column;
+  left: 20px;
+  position: fixed;
 }
 
 /* Option按钮外观 */
@@ -1652,6 +1659,32 @@ checkbox */
 }
 
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 打印页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+@media (max-width: 600px) {
+  /* 左右布局容器 */
+  .split-container {
+    top: calc(var(--project-title-header-height) + 50px);
+  }
+
+  /* Option标题容器-main */
+  .header-container-main {
+    top: var(--project-title-header-height);
+  }
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 9. 右下角按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* 9. 右下角按钮容器 */
+  #bottom-right-controls-container {
+    flex-direction: column;
+  }
+  /* 9.2 Option按钮 */
+  /* Option按钮容器 */
+  #option-buttons-container {
+    flex-direction: column;
+    left: 20px;
+    position: fixed;
+  }
+}
+
 /*  */
 /*  */
 /*  */

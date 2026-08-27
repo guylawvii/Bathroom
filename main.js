@@ -232,8 +232,10 @@ function setupEventListeners() {
   updateOptionBtn.addEventListener("click", updateActiveOption);
   deleteOptionBtn.addEventListener("click", deleteActiveOption);
 
-  // ADD 5.1 隐藏显示Brand+Price
-  toggleBrandBtn.addEventListener("click", toggleBrandPrice);
+  // ADD 5.1 隐藏显示Brand+Price和category name
+  toggleBrandBtn.addEventListener("click", () => {
+    toggleBrandPrice();
+  });
   // ADD 5.2 更新当前Option的Brand+Price
   document.querySelectorAll(".furniture-img").forEach((img) => {
     img.addEventListener("load", function () {
@@ -1157,6 +1159,9 @@ function updateSelectedBrandPrice(category) {
   if (container) _updateBrandPrice(container);
 }
 
+
+
+
 // CF_5.2.2 LOOP THROUGH所有产品，更新Brand+Price
 function updateAllBrandPrice() {
   document
@@ -1470,24 +1475,21 @@ async function initRotateIcon(container, category, imgElement) {
   //   imgElement.src = product_image_Large[category][currentIndex];
   // }
 
+  const currentAngle = angles[currentAngleIndex];
 
-const currentAngle = angles[currentAngleIndex];
+  const newSrc =
+    currentAngle !== 0
+      ? `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`
+      : product_image_Large[category][currentIndex];
 
-const newSrc =
-  currentAngle !== 0
-    ? `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`
-    : product_image_Large[category][currentIndex];
+  imgElement.src = newSrc;
 
-imgElement.src = newSrc;
-
-if (!imgElement.complete) {
-  await new Promise((resolve) => {
-    imgElement.addEventListener("load", resolve, { once: true });
-    imgElement.addEventListener("error", resolve, { once: true });
-  });
-}
-
-
+  if (!imgElement.complete) {
+    await new Promise((resolve) => {
+      imgElement.addEventListener("load", resolve, { once: true });
+      imgElement.addEventListener("error", resolve, { once: true });
+    });
+  }
 
   icon.onclick = (e) => {
     e.stopPropagation();
