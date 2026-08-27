@@ -102,15 +102,33 @@ img {
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 标题 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
 /* ↓↓↓↓↓ 加载中LOADING 旋转图标(刷新网页时) ↓↓↓↓↓ */
-#preLoad-spinner {
+/* #preLoad-spinner {
   position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(247, 247, 247, 0.053);
-  backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  z-index: 99999;
+} */
+
+#preLoad-spinner {
+  position: fixed;
+  top: var(--project-title-header-height);
+  left: 0;
+  right: 0;
+  bottom: calc(var(--btn-height) + var(--btn-to-screen-edge) + 0px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(247, 247, 247, 0.053);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+
   z-index: 99999;
 }
 

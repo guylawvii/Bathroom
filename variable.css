@@ -72,7 +72,9 @@
 
   /* 2. 背景 */
   /* 房间+文字总款 */
-  --split-container-width: 1250px;
+  /* --split-container-width: 1250px; */
+  --split-container-width: min(1250px, 90vw);
+
   /* 房间尺寸 */
   --background-width: var(--split-container-width);
   --background-heightwidthratio: 0.71;
@@ -256,5 +258,20 @@
     /* ↓↓↓↓↓↓ 导出页 ↓↓↓↓↓↓ */
     --export-LR-padding: 20px;
     /* ↑↑↑↑↑↑ 导出页 ↑↑↑↑↑↑ */
+  }
+}
+
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ HP全屏 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+@media (min-height: 1100px) {
+  :root {
+    --split-container-width: 1480px;
+  }
+}
+
+
+@media (max-width: 600px){
+  :root {
+    --split-container-width: 480px;
   }
 }
