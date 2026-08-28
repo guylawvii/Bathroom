@@ -39,7 +39,7 @@ let updateBtnEnabled = false; // Update按钮状态
 
 // LET5 隐藏显示Brand+Price
 let toggleBrandBtn, toggleBrandImg;
-let bool_ShowBrand = false; //默认隐藏Brand+Price
+let bool_ShowBrand = true; //默认隐藏Brand+Price
 
 // LET6 Item List 面板
 let toggleItemsBtn, toggleItemsImg, itemsPanel, itemsListContainer;
@@ -232,10 +232,8 @@ function setupEventListeners() {
   updateOptionBtn.addEventListener("click", updateActiveOption);
   deleteOptionBtn.addEventListener("click", deleteActiveOption);
 
-  // ADD 5.1 隐藏显示Brand+Price和category name
-  toggleBrandBtn.addEventListener("click", () => {
-    toggleBrandPrice();
-  });
+  // ADD 5.1 隐藏显示Brand+Price
+  toggleBrandBtn.addEventListener("click", toggleBrandPrice);
   // ADD 5.2 更新当前Option的Brand+Price
   document.querySelectorAll(".furniture-img").forEach((img) => {
     img.addEventListener("load", function () {
@@ -285,9 +283,6 @@ function updateIndexPlan(category) {
 // ↓↓↓↓↓↓↓↓↓↓↓↓ CF_2 缩略图 ↓↓↓↓↓↓↓↓↓↓↓↓
 // CF_2.1 创建middle-controls-container
 async function showThumbnails(category) {
-  // 显示加载中LOADING 图标(关闭缩略图)
-  showLoadingSpinner();
-
   // CF_2.1.1 如果所选 category 的缩略图还没有缓存，就创建 20 个缩略图容器，标记当前选中的缩略图为 selected，然后加载每个缩略图的图片内容，等待全部加载完成。
   if (!thumbnailCache[category]) {
     thumbnailCache[category] = [];
@@ -305,8 +300,6 @@ async function showThumbnails(category) {
     }
     await Promise.all(loadPromises);
   }
-  // 隐藏加载中LOADING 图标(关闭缩略图)
-  hideLoadingSpinner();
   // CF_2.1.2 清空缩略图显示区域，把缓存的缩略图容器克隆一份添加到页面（避免直接修改缓存），并重新标记当前选中的缩略图为 selected。
   thumbnailList.innerHTML = "";
   thumbnailCache[category].forEach((container) => {
@@ -425,15 +418,6 @@ function switchProduct(category, index) {
     `[data-category="${category}"] .furniture-img, [data-category="${category}"] .background-img`,
   );
   if (mainImg) {
-    // 显示加载中LOADING 图标（切换产品大图）
-    showLoadingSpinner();
-
-    mainImg.onload = function () {
-      // 关闭加载中LOADING 图标（切换产品大图）
-      hideLoadingSpinner();
-      mainImg.onload = null;
-    };
-
     mainImg.src = product_image_Large[category][index];
     currentSelection[category] = index;
 
@@ -442,7 +426,6 @@ function switchProduct(category, index) {
       updateSelectedBrandPrice(category);
     }
   }
-
   hideProductInfo();
 
   // CF_2.3.2 判断是否有产品选择是否有变化（缩略图 + item list）
@@ -633,22 +616,10 @@ function writeOptionBtnHTML() {
       }
     });
     // CF_4.1.5 单击切换Option
-    // btn.addEventListener("click", () => {
-    //   activeOptionIndex = index;
-    //   applyOptionChange(option);
-    // });
-    btn.addEventListener("click", async () => {
+    btn.addEventListener("click", () => {
       activeOptionIndex = index;
-
-      showPreLoadSpinner();
-
-      try {
-        await applyOptionChange(option);
-      } finally {
-        hidePreLoadSpinner();
-      }
+      applyOptionChange(option);
     });
-
     // CF_4.1.6 双击重命名Option
     btn.addEventListener("dblclick", () => {
       const newName = prompt("Edit option name:", option.name);
@@ -663,51 +634,6 @@ function writeOptionBtnHTML() {
 }
 
 // CF_4.2 Update Option按钮
-// function updateActiveOption() {
-//   // 没有改变时禁用单击动作
-//   if (updateBtnEnabled === false) {
-//     return;
-//   }
-
-//   if (activeOptionIndex === -1) {
-//     alert("Please select an option!");
-//     return;
-//   }
-//   savedOptions[activeOptionIndex].selections = JSON.parse(
-//     JSON.stringify(currentSelection),
-//   );
-
-//   savedOptions[activeOptionIndex].itemVisibility = { ...currentItemVisibility };
-
-//   // 保存旋转角度
-//   const rotations = {};
-//   for (const [key, value] of currentAngleIndexMap.entries()) {
-//     // key 格式: "bathroom_dry__wall_0"
-//     // 提取真正的 category（去掉最后的 _数字）
-//     const lastUnderscoreIndex = key.lastIndexOf("_");
-//     const category = key.substring(0, lastUnderscoreIndex);
-//     rotations[category] = value;
-//   }
-//   savedOptions[activeOptionIndex].rotations = rotations;
-
-//   updateNotification.classList.add("show");
-//   updateNotification.innerHTML = `Option "${savedOptions[activeOptionIndex].name}" has been updated!`;
-
-//   setTimeout(() => {
-//     updateNotification.classList.remove("show");
-//   }, 1000);
-
-//   // 【唯一修改】传入深拷贝，避免 loadOption 修改 savedOptions 中的原对象
-//   const optionCopy = JSON.parse(
-//     JSON.stringify(savedOptions[activeOptionIndex]),
-//   );
-
-//   applyOptionChange(savedOptions[activeOptionIndex]);
-
-//   // 禁用Update按钮
-//   disableUpdateBtn();
-// }
-// CF_4.2 Update Option按钮
 function updateActiveOption() {
   // 没有改变时禁用单击动作
   if (updateBtnEnabled === false) {
@@ -718,33 +644,22 @@ function updateActiveOption() {
     alert("Please select an option!");
     return;
   }
-
-  // 保存当前选择
   savedOptions[activeOptionIndex].selections = JSON.parse(
     JSON.stringify(currentSelection),
   );
 
-  // 保存当前物品显示/隐藏状态
-  savedOptions[activeOptionIndex].itemVisibility = {
-    ...currentItemVisibility,
-  };
+  savedOptions[activeOptionIndex].itemVisibility = { ...currentItemVisibility };
 
-  // ========== 保存当前 Option 的旋转角度 ==========
-  // 只保存当前 Option 中每个 category 对应的 currentIndex，
-  // 避免不同图片 index 的旋转状态互相覆盖。
+  // 保存旋转角度
   const rotations = {};
-
-  for (const category in currentSelection) {
-    const currentIndex = currentSelection[category];
-    const key = `${category}_${currentIndex}`;
-
-    if (currentAngleIndexMap.has(key)) {
-      rotations[category] = currentAngleIndexMap.get(key);
-    }
+  for (const [key, value] of currentAngleIndexMap.entries()) {
+    // key 格式: "bathroom_dry__wall_0"
+    // 提取真正的 category（去掉最后的 _数字）
+    const lastUnderscoreIndex = key.lastIndexOf("_");
+    const category = key.substring(0, lastUnderscoreIndex);
+    rotations[category] = value;
   }
-
   savedOptions[activeOptionIndex].rotations = rotations;
-  // ========== 保存旋转角度结束 ==========
 
   updateNotification.classList.add("show");
   updateNotification.innerHTML = `Option "${savedOptions[activeOptionIndex].name}" has been updated!`;
@@ -753,14 +668,14 @@ function updateActiveOption() {
     updateNotification.classList.remove("show");
   }, 1000);
 
-  // 传入深拷贝，避免 loadOption 修改 savedOptions 中的原对象
+  // 【唯一修改】传入深拷贝，避免 loadOption 修改 savedOptions 中的原对象
   const optionCopy = JSON.parse(
     JSON.stringify(savedOptions[activeOptionIndex]),
   );
 
   applyOptionChange(savedOptions[activeOptionIndex]);
 
-  // 禁用 Update 按钮
+  // 禁用Update按钮
   disableUpdateBtn();
 }
 
@@ -863,31 +778,15 @@ async function applyOptionChange(option) {
     }
 
     // ========== 新增：恢复旋转角度 ==========
-    // document
-    //   .querySelectorAll(".background-container, .furniture-container")
-    //   .forEach((container) => {
-    //     const category = container.dataset.category;
-    //     const img = container.querySelector(".background-img, .furniture-img");
-    //     if (category && img) {
-    //       initRotateIcon(container, category, img);
-    //     }
-    //   });
-
-    const rotateInitPromises = [];
-
     document
       .querySelectorAll(".background-container, .furniture-container")
       .forEach((container) => {
         const category = container.dataset.category;
         const img = container.querySelector(".background-img, .furniture-img");
-
         if (category && img) {
-          rotateInitPromises.push(initRotateIcon(container, category, img));
+          initRotateIcon(container, category, img);
         }
       });
-
-    await Promise.all(rotateInitPromises);
-
     // ========== 新增结束 ==========
 
     // 应用完后禁用Apply按钮
@@ -910,24 +809,6 @@ async function loadOption(option) {
     }
   }
 
-  // // CF_4.6.2 返回对应索引的产品图片
-  // Object.keys(option.selections).forEach((category) => {
-  //   currentSelection[category] = option.selections[category];
-
-  //   const img = document.querySelector(
-  //     `[data-category="${category}"] .furniture-img, [data-category="${category}"] .background-img`,
-  //   );
-  //   // 返回对应索引的图片
-  //   if (img) {
-  //     img.src = product_image_Large[category][option.selections[category]];
-  //   }
-
-  //   // 特殊产品
-  //   // 更新当前Option的Brand+Price
-  //   if (bool_ShowBrand) {
-  //     updateAllBrandPrice();
-  //   }
-  // });
   // CF_4.6.2 返回对应索引的产品图片
   Object.keys(option.selections).forEach((category) => {
     currentSelection[category] = option.selections[category];
@@ -946,26 +827,6 @@ async function loadOption(option) {
       updateAllBrandPrice();
     }
   });
-
-  // 等待当前页面所有背景图和产品图加载完成
-  const imageLoadPromises = [];
-
-  const imgs = [
-    ...document.querySelectorAll(".background-img, .furniture-img"),
-  ];
-
-  imgs.forEach((img) => {
-    if (!img.complete) {
-      imageLoadPromises.push(
-        new Promise((resolve) => {
-          img.addEventListener("load", resolve, { once: true });
-          img.addEventListener("error", resolve, { once: true });
-        }),
-      );
-    }
-  });
-
-  await Promise.all(imageLoadPromises);
 
   // CF_4.6.3 如果平面图上某个产品类别被选中
   if (lastClickedCategory) {
@@ -1151,10 +1012,6 @@ function toggleBrandPrice() {
     hideAllBrandPriceTags();
     toggleBrandBtn.dataset.tooltip = "Show Brand";
   }
-
-  document.querySelectorAll(".category-name").forEach((el) => {
-    el.style.display = bool_ShowBrand ? "" : "none";
-  });
 }
 
 // CF_5.2.1 切换单个产品时，更新Brand+Price
@@ -1427,7 +1284,7 @@ function applyItemVisibility(visibility) {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓ CF_8 旋转背景材质图片角度 ↓↓↓↓↓↓↓↓↓↓↓↓
 // ↓↓↓↓↓↓↓↓↓↓↓↓ CF_8 旋转背景材质图片角度 ↓↓↓↓↓↓↓↓↓↓↓↓
-// 存储每个容器的当前角度索引（用于当前会话）
+// 存储每个容器的当前角度索引
 // 存储每个容器的当前角度索引（用于当前会话）
 const currentAngleIndexMap = new Map();
 
@@ -1467,31 +1324,14 @@ async function initRotateIcon(container, category, imgElement) {
   currentAngleIndexMap.set(`${category}_${currentIndex}`, currentAngleIndex);
 
   // 恢复角度
-  // const currentAngle = angles[currentAngleIndex];
-  // if (currentAngle !== 0) {
-  //   const newSrc = `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`;
-  //   imgElement.src = newSrc;
-  // } else {
-  //   // 没有保存的旋转角度，设置为默认图片
-  //   imgElement.src = product_image_Large[category][currentIndex];
-  // }
-
   const currentAngle = angles[currentAngleIndex];
-
-  const newSrc =
-    currentAngle !== 0
-      ? `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`
-      : product_image_Large[category][currentIndex];
-
-  imgElement.src = newSrc;
-
-  if (!imgElement.complete) {
-    await new Promise((resolve) => {
-      imgElement.addEventListener("load", resolve, { once: true });
-      imgElement.addEventListener("error", resolve, { once: true });
-    });
+  if (currentAngle !== 0) {
+    const newSrc = `${baseName}_${currentAngle}deg(${currentIndex + 1}).png`;
+    imgElement.src = newSrc;
+  } else {
+    // 没有保存的旋转角度，设置为默认图片
+    imgElement.src = product_image_Large[category][currentIndex];
   }
-
   icon.onclick = (e) => {
     e.stopPropagation();
     currentAngleIndex = (currentAngleIndex + 1) % angles.length;
@@ -1526,44 +1366,14 @@ async function initRotateIcon(container, category, imgElement) {
 //   return img.complete && img.naturalHeight !== 0;
 // }
 
-// function imageExists(url) {
-//   return new Promise((resolve) => {
-//     const img = new Image();
-//     img.onload = () => resolve(true);
-//     img.onerror = () => resolve(false);
-//     img.src = url;
-//   });
-// }
-
 function imageExists(url) {
-  // 缓存每个 URL 的检查结果
-  if (!imageExists.cache) {
-    imageExists.cache = new Map();
-  }
-
-  // 如果之前检查过，直接返回缓存结果
-  if (imageExists.cache.has(url)) {
-    return Promise.resolve(imageExists.cache.get(url));
-  }
-
-  // 第一次检查图片是否存在
   return new Promise((resolve) => {
     const img = new Image();
-
-    img.onload = () => {
-      imageExists.cache.set(url, true);
-      resolve(true);
-    };
-
-    img.onerror = () => {
-      imageExists.cache.set(url, false);
-      resolve(false);
-    };
-
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
     img.src = url;
   });
 }
-
 // ↑↑↑↑↑↑↑↑↑↑↑↑ CF_8 旋转背景材质图片角度 ↑↑↑↑↑↑↑↑↑↑↑↑
 // ↑↑↑↑↑↑↑↑↑↑↑↑ CF_8 旋转背景材质图片角度 ↑↑↑↑↑↑↑↑↑↑↑↑
 
@@ -1663,25 +1473,6 @@ function preloadImage(url) {
     img.src = url;
   });
 }
-
-// 显示加载中LOADING 旋转图标(刷新网页时)
-function showPreLoadSpinner() {
-  document.getElementById("preLoad-spinner").style.display = "flex";
-}
-// 关闭加载中LOADING 旋转图标(刷新网页时)
-function hidePreLoadSpinner() {
-  document.getElementById("preLoad-spinner").style.display = "none";
-}
-
-// 显示加载中LOADING 图标(打开缩略图，切换产品和切换option时)
-function showLoadingSpinner() {
-  document.getElementById("Loading-spinner").style.display = "flex";
-}
-// 关闭加载中LOADING 图标(打开缩略图，切换产品和切换option时)
-function hideLoadingSpinner() {
-  document.getElementById("Loading-spinner").style.display = "none";
-}
-
 async function validateAllOptions() {
   for (const option of savedOptions) {
     for (const category of Object.keys(option.selections)) {
@@ -1694,7 +1485,6 @@ async function validateAllOptions() {
     }
   }
 }
-
 //更新当前日期
 function updateCurrentDate() {
   const now = new Date();
@@ -1743,19 +1533,6 @@ function preloadExportImages() {
 document.addEventListener("DOMContentLoaded", async function () {
   // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 初始化主页 Main.html ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
   // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 初始化主页 Main.html ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-
-  // HTML 静态图片统一根据 FURNITURE.JS里的IMAGE_SOURCE 设置实际路径（用于切换本地/GH RAW/CLOUDFLARE，避免通过NETLIFY加载）
-  document.querySelectorAll("img[data-image-path]").forEach((img) => {
-    img.src = imagePath(img.dataset.imagePath);
-  });
-  // document
-  //   .querySelectorAll(
-  //     "img[data-image-path]:not(.background-img):not(.furniture-img)",
-  //   )
-  //   .forEach((img) => {
-  //     img.src = imagePath(img.dataset.imagePath);
-  //   });
-
   // A 初始化变量
   initializeDOMReferences();
   // AddEventListner 添加按钮动作
@@ -1771,14 +1548,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   await validateAllOptions();
-  // 显示加载中LOADING 旋转图标(刷新网页时)
-  showPreLoadSpinner();
+
   if (savedOptions.length > 0) {
     activeOptionIndex = 0;
-    await applyOptionChange(savedOptions[0]);
+    applyOptionChange(savedOptions[0]);
   }
-  // 关闭加载中LOADING 旋转图标(刷新网页时)
-  hidePreLoadSpinner();
 
   document.addEventListener("click", function (e) {
     if (
@@ -1790,14 +1564,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  //隐藏Brand+Price和category name
-  if (!bool_ShowBrand) {
-    hideAllBrandPriceTags();
-
-    document.querySelectorAll(".category-name").forEach((el) => {
-      el.style.display = "none";
-    });
-  }
+  //隐藏Brand+Price
+  hideAllBrandPriceTags();
   updateCurrentDate();
   // 初始禁用Update按钮
   disableUpdateBtn();

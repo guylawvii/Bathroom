@@ -56,7 +56,7 @@ img {
   width: var(--split-container-width);
   padding: 0;
 
-  top: var(--project-title-header-height);
+  /* top: var(--project-title-header-height); */
 }
 
 /* Option标题 */
@@ -534,7 +534,7 @@ img {
 }
 /* 4.1.3 卷纸架 */
 #bathroom_toilet__paper__holder_container {
-  bottom: var(--toilet__paper__holder-base);
+  top: var(--toilet__paper__holder-base);
   left: var(--toilet__paper__holder-left);
   width: var(--toilet__paper__holder-width);
 }
