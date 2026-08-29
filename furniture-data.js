@@ -9,7 +9,7 @@
 const IMAGE_SOURCE = "github";
 
 const GITHUB_RAW_BASE =
-  "https://raw.githubusercontent.com/guylawvii/Bathroom/refs/heads/BathroomImages";
+"https://raw.githubusercontent.com/guylawvii/BathroomImages/main/";
 
 
 function imagePath(path) {
