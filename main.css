@@ -906,9 +906,10 @@ img {
 /* 9. 右下角按钮容器 */
 #bottom-right-controls-container {
   align-items: flex-end;
-  right: var(--btn-to-screen-edge);
+  /* left:var(--btn-to-screen-edge); */
+  /* right: var(--btn-to-screen-edge); */
   /* border: solid red; */
-  width: 100vw;
+  width: 98vw;
   justify-content: space-between;
 }
 
@@ -955,7 +956,8 @@ img {
   flex-direction: row;
   gap: 0;
   /* margin-right: 20px; */
-  margin-left: 20px;
+  /* left: var(--btn-to-screen-edge);
+  margin-left: var(--btn-to-screen-edge); */
   /* border:solid blue; */
 }
 
@@ -1658,7 +1660,7 @@ checkbox */
 
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 打印页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   /* 左右布局容器 */
   .split-container {
     top: calc(var(--project-title-header-height) + 50px);
@@ -1672,14 +1674,15 @@ checkbox */
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 9. 右下角按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
   /* 9. 右下角按钮容器 */
   #bottom-right-controls-container {
-    flex-direction: column;
+    width: 96vw;
   }
   /* 9.2 Option按钮 */
   /* Option按钮容器 */
-  #option-buttons-container {
+  #option-buttons-container,
+  #command-buttons-container {
     flex-direction: column;
-    left: 20px;
-    position: fixed;
+    /* left: 0; */
+    /* position: fixed; */
   }
 }
 

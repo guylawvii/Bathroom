@@ -772,7 +772,7 @@ function updateActiveOption() {
   // ========== 保存旋转角度结束 ==========
 
   updateNotification.classList.add("show");
-  updateNotification.innerHTML = `Option "${savedOptions[activeOptionIndex].name}" has been updated!`;
+  updateNotification.innerHTML = `"${savedOptions[activeOptionIndex].name}" updated!`;
 
   setTimeout(() => {
     updateNotification.classList.remove("show");
