@@ -43,10 +43,10 @@ function exportGridView() {
             <!-- ↓↓↓↓↓ 1 Option标题栏 ↓↓↓↓↓ -->
             <div class="header-container-grid">
                 <div class="option-title-grid">
-                    Option: <strong>${option.name.toUpperCase()}</strong>
+                    <strong>${option.name.toUpperCase()}</strong>
                 </div>
                 <div class="estimated-cost-header-grid">
-                    Estimated cost: <strong>${totalprice}</strong>
+                    Estimated <strong>${totalprice}</strong>
                 </div>
             </div>
             <!-- ↑↑↑↑↑ 1 Option标题栏 ↑↑↑↑↑ -->

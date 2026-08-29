@@ -128,11 +128,36 @@ function initializeDOMReferences() {
 
   // A8 打印按钮
   const printBtn = document.getElementById("print-btn");
-  if (printBtn) {
+  // if (printBtn) {
+  //   printBtn.addEventListener("click", () => {
+  //     window.print();
+  //   });
+  // }
+if (printBtn) {
     printBtn.addEventListener("click", () => {
-      window.print();
+        const originalTitle = document.title;
+
+        const optionName =
+            savedOptions[activeOptionIndex]?.name ||
+            `Option${activeOptionIndex + 1}`;
+
+        document.title =
+            `161 West 86th Street Apt 2A_Bathroom_${optionName}`;
+
+        window.addEventListener(
+            "afterprint",
+            () => {
+                document.title = originalTitle;
+            },
+            { once: true }
+        );
+
+        window.print();
     });
-  }
+}
+
+
+
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ A 初始化变量 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ A 初始化变量 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑

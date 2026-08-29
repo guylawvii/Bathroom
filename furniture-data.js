@@ -18,18 +18,15 @@ function imagePath(path) {
     return path;
   }
 
-if (IMAGE_SOURCE === "github") {
+  if (IMAGE_SOURCE === "github") {
     const githubPath = path.replace(
-        /(^|\/)bathroom_([^/]+)/g,
-        (_, prefix, name) =>
-            prefix +
-            "Bathroom_" +
-            name.charAt(0).toUpperCase() +
-            name.slice(1)
+      /(^|\/)bathroom_([^/]+)/g,
+      (_, prefix, name) =>
+        prefix + "Bathroom_" + name.charAt(0).toUpperCase() + name.slice(1),
     );
 
     return GITHUB_RAW_BASE + githubPath.split(" ").join("%20");
-}
+  }
 
   if (IMAGE_SOURCE === "r2") {
     return R2_BASE + path.split(" ").join("%20");
@@ -115,21 +112,17 @@ Object.keys(product_image_Large).forEach((category) => {
 });
 
 // 将墙面和地面映射到同一个产品数据
-const bathroom_wall__finish_images = Array.from(
-  { length: 20 },
-  (_, i) => imagePath(`Product images/bathroom_wall__finish(${i + 1}).png`) ,
+const bathroom_wall__finish_images = Array.from({ length: 20 }, (_, i) =>
+  imagePath(`Product images/bathroom_wall__finish(${i + 1}).png`),
 );
-const bathroom_wall__finish_thumb = Array.from(
-  { length: 20 },
-  (_, i) => imagePath(`Product images/bathroom_wall__finish_thumb(${i + 1}).png`) ,
+const bathroom_wall__finish_thumb = Array.from({ length: 20 }, (_, i) =>
+  imagePath(`Product images/bathroom_wall__finish_thumb(${i + 1}).png`),
 );
-const bathroom_floor__finish_images = Array.from(
-  { length: 20 },
-  (_, i) => imagePath(`Product images/bathroom_floor__finish(${i + 1}).png`) ,
+const bathroom_floor__finish_images = Array.from({ length: 20 }, (_, i) =>
+  imagePath(`Product images/bathroom_floor__finish(${i + 1}).png`),
 );
-const bathroom_floor__finish_thumb = Array.from(
-  { length: 20 },
-  (_, i) => imagePath(`Product images/bathroom_floor__finish_thumb(${i + 1}).png`) ,
+const bathroom_floor__finish_thumb = Array.from({ length: 20 }, (_, i) =>
+  imagePath(`Product images/bathroom_floor__finish_thumb(${i + 1}).png`),
 );
 
 product_image_Large.bathroom_dry__wall = bathroom_wall__finish_images;
@@ -308,13 +301,25 @@ const defaultOptions = [
       bathroom_sconce: 0,
     },
     itemVisibility: {
-      // 设置为 false 表示隐藏，设置为 true 或省略表示显示
-      bathroom_sconce: false,
-      bathroom_base__trim: false,
-      bathroom_shower__pull: false,
-      bathroom_wet__floor: false,
+      // Finish Materials
       bathroom_dry__wall__lower: false,
       bathroom_wet__wall: false,
+      bathroom_wet__floor: false,
+      bathroom_base__trim: false,
+
+      // Plumbing Fixtures
+      bathroom_vanity__faucet: true,
+      bathroom_shower__handshower: true,
+      bathroom_tub__spout: false,
+
+      // Hardwares
+      bathroom_shower__pull: false,
+      bathroom_toilet__paper__holder: true,
+      bathroom_towel__bar: true,
+
+      // Light Fixtures
+      bathroom_mirror__header__light: true,
+      bathroom_sconce: false,
     },
     rotations: {}, // 存储每个 category 的旋转角度
   },
@@ -341,13 +346,25 @@ const defaultOptions = [
       bathroom_sconce: 1,
     },
     itemVisibility: {
-      // 设置为 false 表示隐藏，设置为 true 或省略表示显示
-      bathroom_sconce: false,
-      bathroom_base__trim: false,
-      bathroom_shower__pull: false,
-      bathroom_wet__floor: false,
+      // Finish Materials
       bathroom_dry__wall__lower: false,
       bathroom_wet__wall: false,
+      bathroom_wet__floor: false,
+      bathroom_base__trim: false,
+
+      // Plumbing Fixtures
+      bathroom_vanity__faucet: true,
+      bathroom_shower__handshower: true,
+      bathroom_tub__spout: false,
+
+      // Hardwares
+      bathroom_shower__pull: false,
+      bathroom_toilet__paper__holder: true,
+      bathroom_towel__bar: true,
+
+      // Light Fixtures
+      bathroom_mirror__header__light: true,
+      bathroom_sconce: false,
     },
     rotations: {}, // 存储每个 category 的旋转角度
   },

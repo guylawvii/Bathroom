@@ -119,7 +119,7 @@ function exportToExcel() {
       "option-name-excel-table",
     ).textContent;
     // B2.2 Excel文件名
-    const fileName = "Bathroom_Option " + optionName + ".xlsx";
+    const fileName = "Bathroom_" + optionName + ".xlsx";
     XLSX.writeFile(wb, fileName);
   } catch (error) {
     console.error("Excel Error:", error);
@@ -258,7 +258,7 @@ function exportTableView() {
 
         <body class="page-container-table">
             <!-- 隐藏元素存储Excel下载Option名称 -->
-            <div id="option-name-excel-table" style="display: none">Option ${
+            <div id="option-name-excel-table" style="display: none">${
               option.name
             }</div>
             <!-- 项目标题 -->
@@ -272,7 +272,7 @@ function exportTableView() {
                 <!-- ↓↓↓↓↓ 1 Option标题 ↓↓↓↓↓ -->
                 <div class="header-container-table">
                     <div class="option-title-table">
-                        Option: <strong>${option.name.toUpperCase()}</strong>
+                        <strong>${option.name.toUpperCase()}</strong>
                     </div>
                     <div
                         class="command-btn"
@@ -367,7 +367,7 @@ function exportTableView() {
                         <tfoot>
                             <tr>
                                 <td></td>
-                                <td colspan="8">Estimated cost:</td>
+                                <td colspan="8">Estimated</td>
                                 <td><strong>${totalprice}</strong></td>
                                 <td colspan="2"></td>
                             </tr>

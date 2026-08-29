@@ -55,10 +55,10 @@
     <!-- Option标题容器-main -->
     <div class="header-container-main">
       <div class="option-title-main">
-        Option: <strong id="current-option-name"></strong>
+      <strong id="current-option-name"></strong>
       </div>
       <div class="estimated-cost-header-main">
-        Estimated cost: <strong id="current-option-cost-header"></strong>
+        Estimated <strong id="current-option-cost-header"></strong>
       </div>
     </div>
 
@@ -416,99 +416,115 @@
       <!--  ↑↑↑ 切换Option按钮 ↑↑↑ -->
 
       <!-- ↓↓↓ 排序Option按钮 ↓↓↓ -->
-      <div class="command-btn" id="sort-option-btn" data-tooltip="Sort Options">
-        <img src="Icon images/icon_sort.png" alt="Sort" />
-      </div>
+      <div id="command-buttons-container">
+        <div
+          class="command-btn"
+          id="sort-option-btn"
+          data-tooltip="Sort Options"
+        >
+          <img src="Icon images/icon_sort.png" alt="Sort" />
+        </div>
 
-      <!-- 排序弹窗面板 -->
-      <!-- 排序弹窗 -->
-      <div id="sort-options-modal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <span class="modal-title">OPTIONS</span>
-            <span class="modal-close">&times;</span>
-          </div>
-          <div class="modal-body">
-            <div id="sort-options-list" class="sort-list"></div>
-          </div>
-          <div class="modal-footer">
-            <div class="footer-left">
-              <button id="sort-up-btn" class="sort-control-btn">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 4v16M12 4L6 10M12 4l6 6" />
-                </svg>
-              </button>
-              <button id="sort-down-btn" class="sort-control-btn">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 20V4M12 20l6-6M12 20l-6-6" />
-                </svg>
-              </button>
+        <!-- 排序弹窗面板 -->
+        <!-- 排序弹窗 -->
+        <div id="sort-options-modal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="modal-title">OPTIONS</span>
+              <span class="modal-close">&times;</span>
             </div>
-            <div class="footer-right">
-              <button id="sort-save-btn" class="modal-btn primary">SAVE</button>
+            <div class="modal-body">
+              <div id="sort-options-list" class="sort-list"></div>
+            </div>
+            <div class="modal-footer">
+              <div class="footer-left">
+                <button id="sort-up-btn" class="sort-control-btn">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 4v16M12 4L6 10M12 4l6 6" />
+                  </svg>
+                </button>
+                <button id="sort-down-btn" class="sort-control-btn">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 20V4M12 20l6-6M12 20l-6-6" />
+                  </svg>
+                </button>
+              </div>
+              <div class="footer-right">
+                <button id="sort-save-btn" class="modal-btn primary">
+                  SAVE
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!--  ↑↑↑ 排序Option按钮 ↑↑↑ -->
+        <!--  ↑↑↑ 排序Option按钮 ↑↑↑ -->
 
-      <!-- ↓↓↓ Option操作按钮（更新、增加、删除） ↓↓↓ -->
-      <div class="command-btn" id="update-btn" data-tooltip="Apply changes">
-        <img src="Icon images/icon_1.png" alt="Update" />
-      </div>
-      <div class="command-btn" id="create-btn" data-tooltip="New Option">
-        <img src="Icon images/icon_2.png" alt="Create" />
-      </div>
-      <div class="command-btn" id="delete-btn" data-tooltip="Delete Option">
-        <img src="Icon images/icon_delete_option.png" alt="Delete" />
-      </div>
-      <!-- ↑↑↑ Option操作按钮（更新、增加、删除） ↑↑↑ -->
+        <!-- ↓↓↓ Option操作按钮（更新、增加、删除） ↓↓↓ -->
+        <div class="command-btn" id="update-btn" data-tooltip="Apply changes">
+          <img src="Icon images/icon_1.png" alt="Update" />
+        </div>
+        <div class="command-btn" id="create-btn" data-tooltip="New Option">
+          <img src="Icon images/icon_2.png" alt="Create" />
+        </div>
+        <div class="command-btn" id="delete-btn" data-tooltip="Delete Option">
+          <img src="Icon images/icon_delete_option.png" alt="Delete" />
+        </div>
+        <!-- ↑↑↑ Option操作按钮（更新、增加、删除） ↑↑↑ -->
 
-      <!--  ↓↓↓ 隐藏显示Brand+Price按钮 ↓↓↓ -->
-      <div class="command-btn" id="toggle-brand-btn" data-tooltip="Show Brand">
-        <img
-          id="toggle-brand-btn-img"
-          src="Icon images/icon_info_off.png"
-          alt="Toggle Info"
-        />
-      </div>
-      <!--  ↑↑↑ 隐藏显示Brand+Price按钮 ↑↑↑ -->
+        <!--  ↓↓↓ 隐藏显示Brand+Price按钮 ↓↓↓ -->
+        <div
+          class="command-btn"
+          id="toggle-brand-btn"
+          data-tooltip="Show Brand"
+        >
+          <img
+            id="toggle-brand-btn-img"
+            src="Icon images/icon_info_off.png"
+            alt="Toggle Info"
+          />
+        </div>
+        <!--  ↑↑↑ 隐藏显示Brand+Price按钮 ↑↑↑ -->
 
-      <!-- ↓↓↓ 隐藏显示Item List 按钮 ↓↓↓ -->
-      <div class="command-btn" id="toggle-items-btn" data-tooltip="Item list">
-        <img
-          id="toggle-items-btn-img"
-          src="Icon images/icon_list_off.png"
-          alt="Toggle Items"
-        />
-      </div>
-      <!-- ↑↑↑ 隐藏显示Item List 按钮 ↑↑↑ -->
+        <!-- ↓↓↓ 隐藏显示Item List 按钮 ↓↓↓ -->
+        <div class="command-btn" id="toggle-items-btn" data-tooltip="Item list">
+          <img
+            id="toggle-items-btn-img"
+            src="Icon images/icon_list_off.png"
+            alt="Toggle Items"
+          />
+        </div>
+        <!-- ↑↑↑ 隐藏显示Item List 按钮 ↑↑↑ -->
 
-      <!-- ↓↓↓ 导出按钮 ↓↓↓-->
-      <div class="command-btn" id="export-option" data-tooltip="Export Option">
-        <img src="Icon images/icon_exportoption.png" alt="Export" />
-      </div>
-      <div id="export-view-container">
-        <div class="export-row-container" id="export-table-view">
-          <span class="export-option-text">Table view</span>
-          <div class="command-btn">
-            <img src="Icon images/icon_tableview.png" alt="Export1" />
+        <!-- ↓↓↓ 导出按钮 ↓↓↓-->
+        <div
+          class="command-btn"
+          id="export-option"
+          data-tooltip="Export Option"
+        >
+          <img src="Icon images/icon_exportoption.png" alt="Export" />
+        </div>
+        <div id="export-view-container">
+          <div class="export-row-container" id="export-table-view">
+            <span class="export-option-text">Table view</span>
+            <div class="command-btn">
+              <img src="Icon images/icon_tableview.png" alt="Export1" />
+            </div>
+          </div>
+          <div class="export-row-container" id="export-grid-view">
+            <span class="export-option-text">Grid view</span>
+            <div class="command-btn">
+              <img src="Icon images/icon_gridview.png" alt="Export2" />
+            </div>
           </div>
         </div>
-        <div class="export-row-container" id="export-grid-view">
-          <span class="export-option-text">Grid view</span>
-          <div class="command-btn">
-            <img src="Icon images/icon_gridview.png" alt="Export2" />
-          </div>
-        </div>
-      </div>
-      <!-- ↑↑↑ 导出按钮 ↑↑↑-->
+        <!-- ↑↑↑ 导出按钮 ↑↑↑-->
 
-      <!-- ↓↓↓ 打印按钮 ↓↓↓-->
-      <div class="command-btn" id="print-btn" data-tooltip="Print">
-        <img src="Icon images/icon_print.png" alt="Print" />
+        <!-- ↓↓↓ 打印按钮 ↓↓↓-->
+        <div class="command-btn" id="print-btn" data-tooltip="Print">
+          <img src="Icon images/icon_print.png" alt="Print" />
+        </div>
+        <!-- ↑↑↑ 打印按钮 ↑↑↑-->
       </div>
-      <!-- ↑↑↑ 打印按钮 ↑↑↑-->
     </div>
     <!-- ↑↑↑ 右下角按钮 ↑↑↑ -->
     <!-- ↑↑↑ 右下角按钮 ↑↑↑ -->

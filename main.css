@@ -105,17 +105,6 @@ img {
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 标题 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
 /* ↓↓↓↓↓ 加载中LOADING 旋转图标(刷新网页时) ↓↓↓↓↓ */
-/* #preLoad-spinner {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(247, 247, 247, 0.053);
-  backdrop-filter: blur(100px);
-  -webkit-backdrop-filter: blur(100px);
-  z-index: 99999;
-} */
 
 #preLoad-spinner {
   position: fixed;
@@ -165,6 +154,7 @@ img {
   pointer-events: none;
   z-index: 99999;
   display: none;
+  box-shadow: 0 0 0 12px #fff;
 }
 
 /* 移动中的进度块 */
@@ -880,13 +870,17 @@ img {
   display: flex;
   bottom: var(--btn-to-screen-edge);
   z-index: 35;
+  /* width:100vw; */
 }
+
 /* 8. 中间按钮容器 */
 #middle-controls-container {
   align-items: center;
   justify-content: center;
   left: 50%;
   transform: translateX(-50%);
+  /* border:solid red; */
+  z-index: 55;
 }
 /* 8.1 缩略图按钮 */
 #toggle-thumbnail-btn {
@@ -913,7 +907,14 @@ img {
 #bottom-right-controls-container {
   align-items: flex-end;
   right: var(--btn-to-screen-edge);
-  /* border:solid red; */
+  /* border: solid red; */
+  width: 100vw;
+  justify-content: space-between;
+}
+
+#command-buttons-container {
+  display: flex;
+  /* flex-direction: row; */
 }
 
 /* 9.1 所有按钮 */
@@ -953,7 +954,8 @@ img {
   display: flex;
   flex-direction: row;
   gap: 0;
-  margin-right: 20px;
+  /* margin-right: 20px; */
+  margin-left: 20px;
   /* border:solid blue; */
 }
 
