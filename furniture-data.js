@@ -9,13 +9,12 @@
 const IMAGE_SOURCE = "github";
 
 const GITHUB_RAW_BASE =
-  "https://raw.githubusercontent.com/guylawvii/Bathroom/refs/heads/deploy/netlify/";
+  "https://raw.githubusercontent.com/guylawvii/Bathroom/refs/heads/BathroomImage";
 
-const R2_BASE = "https://R2图片域名/";
 
 function imagePath(path) {
   if (IMAGE_SOURCE === "local") {
-    return path;
+    return "../Github Images/" + path;
   }
 
   if (IMAGE_SOURCE === "github") {
@@ -26,10 +25,6 @@ function imagePath(path) {
     );
 
     return GITHUB_RAW_BASE + githubPath.split(" ").join("%20");
-  }
-
-  if (IMAGE_SOURCE === "r2") {
-    return R2_BASE + path.split(" ").join("%20");
   }
 
   return path;
