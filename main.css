@@ -786,8 +786,8 @@ img {
 .product-info {
   position: fixed;
   overflow-y: auto;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
   padding: 20px;
   max-width: 90%;
   max-height: 90vh;
@@ -1666,6 +1666,17 @@ checkbox */
     height: var(--background-height);
   }
 
+/* ↓↓↓↓↓ 加载中LOADING 图标(打开缩略图，切换产品和切换option时) ↓↓↓↓↓ */
+#Loading-spinner{
+    top: calc(
+      var(--project-title-header-height) + var(--split-container-top-gap) +
+        var(--background-height) + var(--btn-height)/2
+    );
+    bottom: auto;
+    /* border:solid red; */
+}
+
+
   /* 左右布局容器 */
   .split-container {
     top: calc(
@@ -1688,7 +1699,32 @@ checkbox */
   .thumbnail-container:has(.thumbnail[src*="towel" i]) .thumbnail {
     max-width: 200px;
   }
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 7. 产品详情 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* 7.1 产品详情框 */
+  .product-info {
+    left:0;
+    /* transform: translateY(0) !important; */
+    /* border: solid red; */
+    padding: 10px;
+    width:100vw;
+    max-width: 100vw;
+  }
+  /* 7.2 产品名称容器 */
+  .product-header {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+  }
 
+  /* 7.3 产品信息 */
+  .product-data {
+    margin: 0 0;
+  }
+
+  /* 7.3.1 每行产品信息 */
+  .product-data-row {
+    margin-bottom: 5px;
+    /* line-height: 1.4; */
+  }
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 8. 缩略图按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
   /* 8. 中间按钮 & 右下角按钮容器位置 */
   #middle-controls-container {
@@ -1697,7 +1733,8 @@ checkbox */
         var(--background-height)
     );
     bottom: auto;
-    transform: translateX(0%);
+    /* transform: translateX(0%); */
+    /* border:solid blue; */
   }
 
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 9. 右下角按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
@@ -1705,8 +1742,8 @@ checkbox */
   #bottom-right-controls-container {
     width: 96vw;
     flex-direction: column;
-    gap:30px;
-    justify-content:space-between;
+    gap: 30px;
+    justify-content: space-between;
     align-items: center;
     /* border: solid red; */
   }

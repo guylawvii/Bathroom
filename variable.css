@@ -215,8 +215,7 @@
   --brandprice-thumb-height: 18px;
 
   /* 6.3 缩略图 */
-  --thumbnail-height:85px;
-
+  --thumbnail-height: 85px;
 
   /* 6.4 产品详情框 */
   --product-name-ft-size: 16px;
@@ -274,7 +273,6 @@
 }
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ HP全屏 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
-
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 手机页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 @media (max-width: 800px) {
   :root {
@@ -303,6 +301,10 @@
     --brandprice-ft-size: 8px;
     --brandprice-thumb-ft-size: 8px;
     --brandprice-thumb-height: 12px;
+
+    /* 6.4 产品详情框 */
+    --product-name-ft-size: 12px;
+    --product-data-ft-size: 10px;
   }
 }
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 手机页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */

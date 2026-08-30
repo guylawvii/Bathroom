@@ -609,10 +609,23 @@ function showProductInfo(category, index, targetElement) {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-  let top = targetRect.top + scrollTop - infoRect.height - 10;
-  let left =
-    targetRect.left + scrollLeft + targetRect.width / 2 - infoRect.width / 2;
+  // let top = targetRect.top + scrollTop - infoRect.height - 10;
+  // let left =
+  //   targetRect.left + scrollLeft + targetRect.width / 2 - infoRect.width / 2;
+  let top;
+  let left;
+  if (window.matchMedia("(max-width: 800px)").matches) {
+    // 手机页面：INFO 显示在缩略图下方
+    top = targetRect.bottom + 30;
+    // left = targetRect.left + targetRect.width / 2 - infoRect.width / 2;
+  } else {
+    // 电脑：保持原来的位置逻辑
+    top = targetRect.top + scrollTop - infoRect.height - 10;
+    left =
+      targetRect.left + scrollLeft + targetRect.width / 2 - infoRect.width / 2;
 
+    if (top < 10) top = targetRect.bottom + scrollTop + 10;
+  }
   if (top < 10) top = targetRect.bottom + scrollTop + 10;
   if (left < 10) left = 10;
   if (left + infoRect.width > viewportWidth - 10)
