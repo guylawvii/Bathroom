@@ -121,7 +121,6 @@
   --wet-floor-top: calc(var(--wet-wall-height));
 
   /* 2.6 踢脚 base trim */
-  --base__trim-width: var(--dry-wall-lower-width);
   --base__trim-width: var(--dry-wall-width);
   --base__trim-height: 30px;
   --base__trim-top: var(--ground-zero);
@@ -282,23 +281,18 @@
     --split-container-width: min(600px, 90vw);
     --split-container-top-gap: 50px;
 
-    /* 1.4. 按钮 */
-    /* 1.4.1 按钮尺寸 */
-    /* --btn-width:40px;
-    --btn-height: var(--btn-width); */
+    /* 2.6 踢脚 base trim */
+    --base__trim-height: clamp(12px, 5vw, 22px);
 
-    /* 1.4.4 按钮字体 */
-    /* --btn-ft-size: 8px;
-    --btn-hover-cost-ft-size: 10px;
-    --notification-ft-size: 12px; */
+    /* --base__trim-top: var(--ground-zero); */
 
     /* 6. 产品标签 */
     /* 6.1 产品标签 */
     --category-name-ft-size: 8px;
     --category-name-line-height: 12px;
     /* 6.2 Brand + price标签 */
-    --brandprice-height: 12px;
-    --brandprice-ft-size: 8px;
+    --brandprice-height: 9px;
+    --brandprice-ft-size: 7px;
     --brandprice-thumb-ft-size: 8px;
     --brandprice-thumb-height: 12px;
 

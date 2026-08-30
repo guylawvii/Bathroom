@@ -186,6 +186,7 @@ img {
   top: var(--project-title-header-height);
   width: var(--split-container-width);
   transform: translateX(-50%);
+  
 }
 
 /* 左边文字区域 */
@@ -372,6 +373,7 @@ img {
   height: var(--base__trim-height);
   z-index: 1 !important;
   transform: translateY(calc(var(--base__trim-height) * (-1)));
+  /* border:solid red; */
 }
 
 #base__trim_container .background-placeholder img {
@@ -1682,7 +1684,10 @@ checkbox */
     top: calc(
       var(--project-title-header-height) + var(--split-container-top-gap)
     );
+    z-index:26;
   }
+
+
 
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 6.缩略图 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
   /* 6.1 缩略图栏 */
@@ -1758,10 +1763,14 @@ checkbox */
   /* 9.6.1 Item List 面板 */
   .items-panel {
     /* border: solid red; */
+    position:fixed;
     background-color: white;
     transform: translate(0);
     left: 0;
-    padding: 0;
+     left: calc(
+      -50vw + (var(--split-container-width) / 2)
+    );
+    /* padding: 5px 50px; */
     top: var(--background-height);
     top: 0;
     /* bottom:0; */
@@ -1769,8 +1778,16 @@ checkbox */
     /* width:auto; */
     overflow: visible;
     height: fit-content;
-    width: 180px;
+    width: 200px;
+    z-index: 1000;
   }
+
+
+.items-list-container {
+  padding: 0 0 20px 0;
+}
+
+
 }
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 手机页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
