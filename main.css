@@ -105,22 +105,19 @@ img {
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 标题 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
 /* ↓↓↓↓↓ 加载中LOADING 旋转图标(刷新网页时) ↓↓↓↓↓ */
-
 #preLoad-spinner {
   position: fixed;
   top: var(--project-title-header-height);
   left: 0;
   right: 0;
-  bottom: calc(var(--btn-height) + var(--btn-to-screen-edge) + 0px);
-
+  height: var(--background-height);
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: rgba(247, 247, 247, 0.053);
   backdrop-filter: blur(100px);
   -webkit-backdrop-filter: blur(100px);
-
+  /* border: solid green; */
   z-index: 99999;
 }
 
@@ -194,7 +191,6 @@ img {
 /* 左边文字区域 */
 .left-panel-text {
   overflow: auto;
-  /* padding: 20px; */
   width: var(--left-panel-text-width);
   background: #f0efee;
 }
@@ -730,24 +726,24 @@ img {
 
 /* 6.2.1 每个缩略图 */
 .thumbnail {
-  height: 85px;
+  height: var(--thumbnail-height);
   object-fit: contain;
   cursor: pointer;
 }
 
 /* 6.2.1 特殊情况 */
 /* 毛巾架缩略图限定宽度 */
-.thumbnail-container:has(.thumbnail[src*="towel"]) .thumbnail {
+.thumbnail-container:has(.thumbnail[src*="towel" i]) .thumbnail {
   max-width: 300px;
 }
 
 /* 卷纸架缩略图限定宽度 */
-.thumbnail-container:has(.thumbnail[src*="holder"]) .thumbnail {
+.thumbnail-container:has(.thumbnail[src*="holder" i]) .thumbnail {
   max-width: 100px;
 }
 
 /* 顶灯缩略图限定宽度 */
-.thumbnail-container:has(.thumbnail[src*="header__light"]) .thumbnail {
+.thumbnail-container:has(.thumbnail[src*="header__light" i]) .thumbnail {
   max-width: 200px;
 }
 
@@ -906,9 +902,6 @@ img {
 /* 9. 右下角按钮容器 */
 #bottom-right-controls-container {
   align-items: flex-end;
-  /* left:var(--btn-to-screen-edge); */
-  /* right: var(--btn-to-screen-edge); */
-  /* border: solid red; */
   width: 98vw;
   justify-content: space-between;
 }
@@ -1337,7 +1330,6 @@ checkbox */
 /* 9.6.1 Item List 面板 */
 .items-panel {
   position: absolute;
-  /* display: flex; */
   display: none;
   overflow: hidden;
   flex-direction: column;
@@ -1660,31 +1652,90 @@ checkbox */
 
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 打印页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 手机页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 @media (max-width: 800px) {
-  /* 左右布局容器 */
-  .split-container {
-    top: calc(var(--project-title-header-height) + 50px);
-  }
-
   /* Option标题容器-main */
   .header-container-main {
     top: var(--project-title-header-height);
+  }
+  /* ↓↓↓↓↓ 加载中LOADING 旋转图标(刷新网页时) ↓↓↓↓↓ */
+  #preLoad-spinner {
+    top: calc(
+      var(--project-title-header-height) + var(--split-container-top-gap)
+    );
+    height: var(--background-height);
+  }
+
+  /* 左右布局容器 */
+  .split-container {
+    top: calc(
+      var(--project-title-header-height) + var(--split-container-top-gap)
+    );
+  }
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 6.缩略图 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* 6.1 缩略图栏 */
+  #thumbnails-section {
+    top: calc(
+      var(--project-title-header-height) + var(--split-container-top-gap) +
+        var(--background-height) + var(--btn-height)
+    );
+    bottom: auto;
+  }
+
+  /* 6.2.1 特殊情况 */
+  /* 毛巾架缩略图限定宽度 */
+  .thumbnail-container:has(.thumbnail[src*="towel" i]) .thumbnail {
+    max-width: 200px;
+  }
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 8. 缩略图按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* 8. 中间按钮 & 右下角按钮容器位置 */
+  #middle-controls-container {
+    top: calc(
+      var(--project-title-header-height) + var(--split-container-top-gap) +
+        var(--background-height)
+    );
+    bottom: auto;
+    transform: translateX(0%);
   }
 
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 9. 右下角按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
   /* 9. 右下角按钮容器 */
   #bottom-right-controls-container {
     width: 96vw;
+    flex-direction: column;
+    gap:30px;
+    justify-content:space-between;
+    align-items: center;
+    /* border: solid red; */
   }
   /* 9.2 Option按钮 */
   /* Option按钮容器 */
   #option-buttons-container,
   #command-buttons-container {
-    flex-direction: column;
-    /* left: 0; */
-    /* position: fixed; */
+    /* flex-direction: column; */
+  }
+
+  /* 9.6 Item List按钮 */
+  /* 9.6.1 Item List 面板 */
+  .items-panel {
+    /* border: solid red; */
+    background-color: white;
+    transform: translate(0);
+    left: 0;
+    padding: 0;
+    top: var(--background-height);
+    top: 0;
+    /* bottom:0; */
+    /* height:100vh; */
+    /* width:auto; */
+    overflow: visible;
+    height: fit-content;
+    width: 180px;
   }
 }
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 手机页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
 /*  */
 /*  */

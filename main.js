@@ -133,31 +133,27 @@ function initializeDOMReferences() {
   //     window.print();
   //   });
   // }
-if (printBtn) {
+  if (printBtn) {
     printBtn.addEventListener("click", () => {
-        const originalTitle = document.title;
+      const originalTitle = document.title;
 
-        const optionName =
-            savedOptions[activeOptionIndex]?.name ||
-            `Option${activeOptionIndex + 1}`;
+      const optionName =
+        savedOptions[activeOptionIndex]?.name ||
+        `Option${activeOptionIndex + 1}`;
 
-        document.title =
-            `161 West 86th Street Apt 2A_Bathroom_${optionName}`;
+      document.title = `161 West 86th Street Apt 2A_Bathroom_${optionName}`;
 
-        window.addEventListener(
-            "afterprint",
-            () => {
-                document.title = originalTitle;
-            },
-            { once: true }
-        );
+      window.addEventListener(
+        "afterprint",
+        () => {
+          document.title = originalTitle;
+        },
+        { once: true },
+      );
 
-        window.print();
+      window.print();
     });
-}
-
-
-
+  }
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ A 初始化变量 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ A 初始化变量 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
@@ -226,6 +222,26 @@ function setupEventListeners() {
           container.classList.remove("selected");
         });
       container.classList.add("selected");
+
+      // 手机页面：单击缩略图后，同时显示产品 INFO
+      if (window.matchMedia("(max-width: 800px)").matches) {
+        if (productList[category]?.[index]) {
+          if (container.classList.contains("info-visible")) {
+            hideProductInfo();
+            container.classList.remove("info-visible");
+          } else {
+            // 隐藏其他缩略图的 INFO 状态
+            thumbnailList
+              .querySelectorAll(".thumbnail-container")
+              .forEach((container) => {
+                container.classList.remove("info-visible");
+              });
+
+            showProductInfo(category, index, thumb);
+            container.classList.add("info-visible");
+          }
+        }
+      }
     }
   });
   // ADD 3.2 缩略图按钮
