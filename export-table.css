@@ -285,7 +285,8 @@ tfoot tr td {
   /* ↓↓↓↓↓ 2.3 表尾 ↓↓↓↓↓ */
 
   #chart tfoot {
-    /* position: static; */
+    bottom: var(--date-height);
+    z-index: 1000;
   }
 
   /* 2.3 字体 */
