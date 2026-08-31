@@ -271,6 +271,7 @@ tfoot tr td {
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 手机页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 @media (max-width: 800px) {
   .content-container-table {
+    overflow-x: auto;
     overflow-y: visible;
   }
 
