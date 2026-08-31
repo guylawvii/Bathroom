@@ -282,7 +282,7 @@
     --split-container-top-gap: 50px;
 
     /* 2.6 踢脚 base trim */
-    --base__trim-height: clamp(12px, 5vw, 22px);
+    --base__trim-height: clamp(12px, 3.5vw, 22px);
 
     /* --base__trim-top: var(--ground-zero); */
 
@@ -291,7 +291,7 @@
     --category-name-ft-size: 8px;
     --category-name-line-height: 12px;
     /* 6.2 Brand + price标签 */
-    --brandprice-height: 9px;
+    --brandprice-height: 10px;
     --brandprice-ft-size: 7px;
     --brandprice-thumb-ft-size: 8px;
     --brandprice-thumb-height: 12px;

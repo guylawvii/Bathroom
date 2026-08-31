@@ -186,7 +186,6 @@ img {
   top: var(--project-title-header-height);
   width: var(--split-container-width);
   transform: translateX(-50%);
-  
 }
 
 /* 左边文字区域 */
@@ -870,7 +869,6 @@ img {
   z-index: 35;
   /* width:100vw; */
 }
-
 /* 8. 中间按钮容器 */
 #middle-controls-container {
   align-items: center;
@@ -1001,7 +999,7 @@ img {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10000;
+  border: 10px solid red;
 }
 
 /* 9.3.2 弹窗容器 */
@@ -1011,6 +1009,8 @@ img {
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: solid red;
+  z-index: 1000;
 }
 
 /* 9.3.2.1 顶部 -> 弹窗标题*/
@@ -1051,8 +1051,6 @@ img {
   display: flex;
   flex-direction: column;
   gap: 1px;
-  /* padding:0 30px; */
-  /* border:solid red; */
 }
 
 /* 中部 -> 列表区域 -> 每个排序项 */
@@ -1668,26 +1666,58 @@ checkbox */
     height: var(--background-height);
   }
 
-/* ↓↓↓↓↓ 加载中LOADING 图标(打开缩略图，切换产品和切换option时) ↓↓↓↓↓ */
-#Loading-spinner{
+  /* ↓↓↓↓↓ 加载中LOADING 图标(打开缩略图，切换产品和切换option时) ↓↓↓↓↓ */
+  #Loading-spinner {
     top: calc(
       var(--project-title-header-height) + var(--split-container-top-gap) +
-        var(--background-height) + var(--btn-height)/2
+        var(--background-height) + var(--btn-height) / 2
     );
     bottom: auto;
     /* border:solid red; */
-}
-
+  }
 
   /* 左右布局容器 */
   .split-container {
     top: calc(
       var(--project-title-header-height) + var(--split-container-top-gap)
     );
-    z-index:26;
+    z-index: 26;
   }
 
+  /* 3.4 特殊产品标签位置 */
+  /* 干区地面 */
+  #dry__floor_container .brand-price-wrapper {
+    /* transform: translateY(calc(var(--base__trim-height) * (-1) - 10px)); */
+    top: 5%;
+  }
 
+  /* 踢脚 */
+  #base__trim_container .brand-price-wrapper {
+    transform: translateY(calc(var(--base__trim-height) * (-1) - 10px));
+  }
+  #base__trim_container .category-name {
+    transform: translateY(calc(var(--base__trim-height) * (-1) + 6px));
+  }
+
+  /* 洗手盆 */
+  #bathroom_vanity_container .brand-price-wrapper {
+    top: 55%;
+  }
+
+  /* 水龙头 */
+  #bathroom_vanity__faucet_container .brand-price-wrapper {
+    top: 15%;
+  }
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 5. Brand+Price Tag ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* Brand+Price Tag 平面图 & 缩略图*/
+  .brand-tag,
+  .price-tag {
+    bottom: 2px;
+  }
+  .price-tag {
+    padding: 0 1px;
+  }
 
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 6.缩略图 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
   /* 6.1 缩略图栏 */
@@ -1702,16 +1732,16 @@ checkbox */
   /* 6.2.1 特殊情况 */
   /* 毛巾架缩略图限定宽度 */
   .thumbnail-container:has(.thumbnail[src*="towel" i]) .thumbnail {
-    max-width: 200px;
+    max-width: 150px;
   }
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 7. 产品详情 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
   /* 7.1 产品详情框 */
   .product-info {
-    left:0;
+    left: 0;
     /* transform: translateY(0) !important; */
     /* border: solid red; */
     padding: 10px;
-    width:100vw;
+    width: 100vw;
     max-width: 100vw;
   }
   /* 7.2 产品名称容器 */
@@ -1739,7 +1769,7 @@ checkbox */
     );
     bottom: auto;
     /* transform: translateX(0%); */
-    /* border:solid blue; */
+    border: solid blue;
   }
 
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 9. 右下角按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
@@ -1747,29 +1777,22 @@ checkbox */
   #bottom-right-controls-container {
     width: 96vw;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     justify-content: space-between;
     align-items: center;
     /* border: solid red; */
-  }
-  /* 9.2 Option按钮 */
-  /* Option按钮容器 */
-  #option-buttons-container,
-  #command-buttons-container {
-    /* flex-direction: column; */
+    z-index: 100;
   }
 
   /* 9.6 Item List按钮 */
   /* 9.6.1 Item List 面板 */
   .items-panel {
     /* border: solid red; */
-    position:fixed;
+    position: fixed;
     background-color: white;
     transform: translate(0);
     left: 0;
-     left: calc(
-      -50vw + (var(--split-container-width) / 2)
-    );
+    left: calc(-50vw + (var(--split-container-width) / 2));
     /* padding: 5px 50px; */
     top: var(--background-height);
     top: 0;
@@ -1782,12 +1805,9 @@ checkbox */
     z-index: 1000;
   }
 
-
-.items-list-container {
-  padding: 0 0 20px 0;
-}
-
-
+  .items-list-container {
+    padding: 0 0 20px 0;
+  }
 }
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 手机页面 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
