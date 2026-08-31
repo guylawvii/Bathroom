@@ -166,3 +166,44 @@
     height: 150px;
   }
 }
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 手机页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+@media (max-width: 800px) {
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 3. 图片部分 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+
+  /* 3.2 location标题部分 */
+  .location-wrapper-name-grid {
+    font-size: 12px;
+    /* margin-bottom: 10px;
+    color: #555;
+    font-weight: 500;
+    padding-bottom: 5px; */
+  }
+
+  /* 3.4.1 每个产品类型名称 */
+  .category-name-grid {
+    font-size: calc(var(--category-name-ft-size) + 2px);
+  }
+
+  /* 3.4.2 每个产品图片 */
+  .furniture-img-grid {
+    /* height: 150px;
+  max-width: 350px; */
+    height: 100px;
+    max-width: 250px;
+  }
+
+  /* 3.4.3 特殊产品图片尺寸宽度限制 */
+  /* 洗手台 */
+  .furniture-img-grid[src*="vanity"] {
+    /* max-width: 400px !important; */
+  }
+  /* 水龙头 */
+  .furniture-img-grid[src*="vanity__faucet"] {
+    /* max-width: 200px !important; */
+  }
+  /* 卷纸架 */
+  .furniture-img-grid[src*="holder"] {
+    /* max-width: 200px !important; */
+  }
+}
