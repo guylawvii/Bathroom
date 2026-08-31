@@ -27,7 +27,7 @@
   background: white;
 }
 /* Option标题容器 */
-.header-container-grid {
+.option-header-grid {
   position: fixed;
   display: flex;
   align-items: center;

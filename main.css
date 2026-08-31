@@ -42,7 +42,7 @@ img {
 }
 
 /* Option标题容器-main */
-.header-container-main {
+.option-header-main {
   position: fixed;
   display: flex;
   align-items: center;
@@ -50,7 +50,6 @@ img {
   background: white;
   z-index: 1000;
   background-color: transparent;
-
   height: var(--project-title-header-height);
   top: 0;
   width: var(--split-container-width);
@@ -63,7 +62,7 @@ img {
 .option-title-main,
 .option-title-table,
 .option-title-grid {
-  font-size: var(--option-name-ft-size);
+  font-size: calc(var(--option-name-ft-size) - 2px);
   font-weight: 300;
 }
 
@@ -82,7 +81,6 @@ img {
 .option-title-main,
 .estimated-cost-header-main {
   padding: 0;
-  font-size: calc(var(--option-name-ft-size) - 2px);
 }
 
 .estimated-cost-header-main {
@@ -1550,7 +1548,7 @@ checkbox */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
   }
   /* Option标题容器-main */
-  .header-container-main {
+  .option-header-main {
     display: flex;
     width: var(--split-container-width);
     padding: 0;
@@ -1652,8 +1650,9 @@ checkbox */
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 手机页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 @media (max-width: 800px) {
   /* Option标题容器-main */
-  .header-container-main {
+  .option-header-main {
     top: var(--project-title-header-height);
+    height: var(--option-header-height);
   }
   /* ↓↓↓↓↓ 加载中LOADING 旋转图标(刷新网页时) ↓↓↓↓↓ */
   #preLoad-spinner {

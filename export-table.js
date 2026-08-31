@@ -238,6 +238,7 @@ function exportTableView() {
         <head>
             <title>Option ${option.name}_Table View</title>
             <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link rel="stylesheet" href="variable.css" />
             <link rel="stylesheet" href="main.css" />
             <link rel="stylesheet" href="export-table.css" />
@@ -270,7 +271,7 @@ function exportTableView() {
             <!-- ↓↓↓↓↓ 主体 ↓↓↓↓↓ -->
             <div class="body-container-table">
                 <!-- ↓↓↓↓↓ 1 Option标题 ↓↓↓↓↓ -->
-                <div class="header-container-table">
+                <div class="option-header-table">
                     <div class="option-title-table">
                         <strong>${option.name.toUpperCase()}</strong>
                     </div>

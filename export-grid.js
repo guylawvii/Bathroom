@@ -14,6 +14,8 @@ function exportGridView() {
 <!DOCTYPE html>
 <html>
     <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Option ${option.name}_Grid View</title>
         <link rel="stylesheet" href="variable.css" />
         <link rel="stylesheet" href="main.css" />
@@ -41,7 +43,7 @@ function exportGridView() {
         <div class="body-container-grid">
 
             <!-- ↓↓↓↓↓ 1 Option标题栏 ↓↓↓↓↓ -->
-            <div class="header-container-grid">
+            <div class="option-header-grid">
                 <div class="option-title-grid">
                     <strong>${option.name.toUpperCase()}</strong>
                 </div>
