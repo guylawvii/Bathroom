@@ -278,6 +278,10 @@ tfoot tr td {
   }
 
   /* ↓↓↓↓↓ 2.3 表尾 ↓↓↓↓↓ */
+
+  #chart tfoot {
+    position: static;
+  }
   /* 2.3 字体 */
   #chart tfoot td {
     font-size: 10px;
@@ -294,17 +298,14 @@ tfoot tr td {
   /* 所有单元格左右边距 & 字体大小 */
   #chart th,
   #chart td {
-    padding-left:3px;
+    padding-left: 3px;
     padding-right: 3px;
     font-size: 10px;
   }
 
-
-/* ↓↓↓↓↓ 3. 滚动条 ↓↓↓↓↓ */
-/* 滚动条背景 */
-.content-container-table::-webkit-scrollbar{
+  /* ↓↓↓↓↓ 3. 滚动条 ↓↓↓↓↓ */
+  /* 滚动条背景 */
+  .content-container-table::-webkit-scrollbar {
     display: none;
-}
-
-
+  }
 }
