@@ -194,16 +194,30 @@
   }
 
   /* 3.4.3 特殊产品图片尺寸宽度限制 */
-  /* 洗手台 */
-  .furniture-img-grid[src*="vanity"] {
-    /* max-width: 400px !important; */
-  }
   /* 水龙头 */
   .furniture-img-grid[src*="vanity__faucet"] {
-    /* max-width: 200px !important; */
+    max-width: 120px !important;
   }
   /* 卷纸架 */
   .furniture-img-grid[src*="holder"] {
-    /* max-width: 200px !important; */
+    max-width: 100px !important;
+  }
+
+  /* 镜顶灯 */
+  .furniture-img-grid[src*="header__light"] {
+    max-width: 200px !important;
+  }
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 4. Brand+Price Tag ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  .brand-tag-grid,
+  .price-tag-grid {
+    font-size: 10px;
+    padding: 0px 2px;
+  }
+
+  /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 5. 滚动条 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  /* 滚动条背景 */
+  .body-container-grid::-webkit-scrollbar {
+    display: none;
   }
 }
