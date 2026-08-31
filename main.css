@@ -1654,6 +1654,14 @@ checkbox */
     top: var(--project-title-header-height);
     height: var(--option-header-height);
   }
+
+  /* Option标题 */
+  .option-title-main,
+  .option-title-table,
+  .option-title-grid {
+    font-weight:400;
+  }
+
   /* ↓↓↓↓↓ 加载中LOADING 旋转图标(刷新网页时) ↓↓↓↓↓ */
   #preLoad-spinner {
     top: calc(
