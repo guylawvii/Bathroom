@@ -270,6 +270,10 @@ tfoot tr td {
 
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 手机页面 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 @media (max-width: 800px) {
+  .content-container-table {
+    overflow-y: visible;
+  }
+
   /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 2. 表格部分 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
   /* 2.1 表头 & 表尾 */
   #chart thead,
@@ -280,8 +284,9 @@ tfoot tr td {
   /* ↓↓↓↓↓ 2.3 表尾 ↓↓↓↓↓ */
 
   #chart tfoot {
-    position: static;
+    /* position: static; */
   }
+
   /* 2.3 字体 */
   #chart tfoot td {
     font-size: 10px;
